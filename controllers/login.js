@@ -8,13 +8,15 @@ const Login ={
      // 登录页
      **/
     index:(req,res,next)=>{
-        
+       userModel.find().then(doc=>{
+
+       }).catch(err=>{
+
+       })
 
     },
     /**
-     // 登录操作
-	// test
-     //ha
+     * 登录操作
      **/
     login:(req,res,next)=>{
         //邮箱
