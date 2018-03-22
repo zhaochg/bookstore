@@ -5,6 +5,9 @@ const Home = {
 	// 我是赵晓蒙,刚刚修改了这个文件
 
     index: (req, res, next) => {
+
+        //test
+
         //幻灯
         //推荐
         bookModel.find().then(doc => {
