@@ -2,6 +2,7 @@ const bookModel = require('../models/book');
 
 const Home = {
     // 首页
+	// test
 
     index: (req, res, next) => {
         //幻灯
