@@ -2,8 +2,12 @@ const bookModel = require('../models/book');
 
 const Home = {
     // 首页
+	// test
 
     index: (req, res, next) => {
+
+        //test
+
         //幻灯
         //推荐
         bookModel.find().then(doc => {
