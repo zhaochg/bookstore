@@ -4,6 +4,9 @@ const Home = {
     // 首页
 
     index: (req, res, next) => {
+
+        //test
+
         //幻灯
         //推荐
         bookModel.find().then(doc => {
