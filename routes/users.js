@@ -8,10 +8,13 @@ const Register = require('../controllers/regisder');
  */
 router.get('/login',Login.index);
 
+router.post('/login',Login.login);
 /**
  * 注册页
  */
 router.get('/register',Register.index);
+
+router.post('/register',Register.regisder);
 
 
 

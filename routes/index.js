@@ -9,45 +9,20 @@ router.get('/', Home.index);
 /**
  * 推荐好书
  */
-router.get('/recommend',function (req,res,next) {
-    res.render('recommend');
-});
+router.get('/recommend', Home.tui);
 /**
  * 最近上架
  */
-router.get('/newBooks',function (req,res,next) {
-    res.render('newBooks');
-});
+router.get('/newBooks',Home.news);
 /**
  * 分类
  */
-router.get('/classification',function (req,res,next) {
-    res.render('classification');
-});
+router.get('/classification',Home.category);
 /**
  * 排行
  */
-router.get('/rank',function (req,res,next) {
-    res.render('rank');
-});
-/**
- * 结算页
- */
-router.get('/balance',function (req,res,next) {
-    res.render('balance');
-});
-/**
- * 确认支付
- */
-router.get('/firm',function (req,res,next) {
-    res.render('firm');
-});
-/**
- * 完成支付
- */
-router.get('/pay',function (req,res,next) {
-    res.render('pay');
-});
+router.get('/rank',Home.ranking);
+
 /**
  * 购物车
  */
