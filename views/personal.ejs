@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>个人中心</title>
+    <link rel="stylesheet" href="/bootstrap-3.3.7/css/bootstrap.min.css">
+    <!--bootstrap官方样式-->
+    <link rel="stylesheet" href="/stylesheets/normalize.css">
+    <!--强跨浏览器表现的一致性css 重置样式-->
+    <link rel="stylesheet" href="/stylesheets/bookstore.css">
+    <!--自用样式-->
+</head>
+<body>
+<!--头部-->
+<%-include('navbar')%>
+<!--路径导航-->
+<div class="container">
+    <ol class="breadcrumb" style="background: rgba(212,212,212,0.5)">
+        <li><a href="/">首页</a></li>
+        <li class="active">个人中心</li>
+    </ol>
+</div>
+<!--个人中心-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <h4>个人中心</h4>
+            <hr>
+            <nav>
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active"><a href="#book" data-toggle="tab">我的书架</a></li>
+                    <li><a href="#order" data-toggle="tab">我的订单</a></li>
+                    <li><a href="#set" data-toggle="tab">个人设置</a></li>
+                    <li><a href="#privacy" data-toggle="tab">隐私设置</a></li>
+                    <li><a href="#address" data-toggle="tab">地址管理</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-md-10 tab-content" style="background: #fff;height: 700px">
+            <div class="tab-pane fade in active" id="book">
+                <!--我的书架-->
+                <%-include('myspace/collect')%>
+            </div>
+            <div class="tab-pane fade" id="order">
+                <!--我的订单-->
+                <%-include('myspace/order')%>
+            </div>
+            <div class="tab-pane fade" id="set">
+                <!--个人设置 -->
+                <%-include('myspace/set')%>
+            </div>
+            <div class="tab-pane fade" id="privacy">
+                <!--隐私设置-->
+                <%-include('myspace/privacy')%>
+            </div>
+            <div class="tab-pane fade" id="address">
+                <!--地址管理 -->
+                <%-include('myspace/address')%>
+            </div>
+        </div>
+    </div>
+</div>
+<!--底部-->
+<%-include('footer')%>
+</body>
+<script src="/javascripts/jquery-3.2.1.min.js"></script><!--jquery-->
+<script src="/bootstrap-3.3.7/js/bootstrap.js"></script><!--bootstrap官方js-->
+<script>
+    $(function () {
+        $('#myTab li:eq(0) a').tab('show');
+
+    });
+</script>
+</html>

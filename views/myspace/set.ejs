@@ -1,0 +1,83 @@
+ <div class="row">
+     <div class="text-danger" style="margin-left: 10px">
+        <strong>个人设置</strong>
+     </div>
+     <br>
+     <div class="col-md-2 text-center">
+         <table class="table">
+             <tr>
+                 <td><img src="/images/txicon.jpg"></td>
+             </tr>
+             <tr>
+                 <td><span class="btn btn-info">修改头像</span></td>
+             </tr>
+         </table>
+     </div>
+     <div class="col-md-5">
+         <table class="table">
+             <tr>
+                 <td>邮箱</td>
+                 <td>1359219091@qq.com</td>
+             </tr>
+             <tr>
+                 <td>昵称</td>
+                 <td>静静</td>
+             </tr>
+             <tr>
+                 <td>性别</td>
+                 <td>女</td>
+             </tr>
+             <tr>
+                 <td>出生日期</td>
+                 <td>1111-01-01</td>
+             </tr>
+             <tr>
+                 <td>自我介绍</td>
+                 <td></td>
+             </tr>
+         </table>
+        <div class="text-right">
+            <button type="button" class="btn btn-primary btn-ms" data-toggle="modal" data-target="#myModal02">
+                编辑
+            </button>
+        </div>
+     </div>
+     <!--编辑资料模态框-->
+     <div class="modal fade" id="myModal02" tabindex="1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">编辑资料</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="nickname">昵称</label>
+                            <input type="text" class="form-control" id="nickname">
+                        </div>
+                        <div class="form-group">
+                            <label for="sex">性别</label>
+                            <div class="checkbox">
+                                <input type="radio" name="sex" id="sex"> 男
+                                <input type="radio" name="sex">女
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="shengri">出生年月</label>
+                            <input type="text" class="form-control" id="shengri">
+                        </div>
+                        <div class="form-group">
+                            <label for="ziwo">自我介绍</label>
+                            <textarea class="form-control" id="ziwo"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+     <!--页脚-->
+ </div>

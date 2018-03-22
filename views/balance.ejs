@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>结算页</title>
+    <link rel="stylesheet" href="/bootstrap-3.3.7/css/bootstrap.min.css">
+    <!--bootstrap官方样式-->
+    <link rel="stylesheet" href="/stylesheets/normalize.css">
+    <!--强跨浏览器表现的一致性css 重置样式-->
+    <link rel="stylesheet" href="/stylesheets/bookstore.css">
+    <link rel="stylesheet" href="/stylesheets/base.css">
+    <link rel="stylesheet" href="/stylesheets/balance.css">
+    <!--自用样式-->
+</head>
+<body>
+<!--头部-->
+<%-include('navbar')%>
+<!--路径导航-->
+<div class="container">
+    <ol class="breadcrumb" style="background: rgba(212,212,212,0.5)">
+        <li><a href="/">首页</a></li>
+        <li class="active">确认收货地址</li>
+    </ol>
+</div>
+<!--内容-->
+<div class="w">
+    <div id="content">
+        <div id="two">
+            <div class="fl">
+                <h4>确认收货地址</h4>
+            </div>
+            <div class="fr">
+                <a href="">管理收货地址</a>
+            </div>
+        </div>
+        <div id="three">
+            <div class="form-group fl">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios"  value="option1" checked>
+                        河南省郑州市王牛牛收
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsRadios"  value="option1">
+                        河南省郑州市王牛牛收
+                    </label>
+                </div>
+            </div>
+            <div class="fr">
+                <a href="">默认地址</a>
+            </div>
+        </div>
+
+
+        <!--表格-->
+        <div class="container-fluid">
+            <table class="table table-striped">
+                <tr>
+                    <td>购买信息</td>
+                    <td>单价</td>
+                    <td>数量</td>
+                    <td>小计</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="./images/54654654.jpg" alt="">
+                        <h5>小道德方寸之间</h5>
+                    </td>
+                    <td>￥0.00</td>
+                    <td>
+                        1
+                    </td>
+                    <td>￥0.00</td>
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>共3本，合计3.00元</td>
+                </tr>
+            </table>
+            <div class="fl">
+                <a href="/">再逛逛</a>
+            </div>
+            <div class="fr">
+                <a href="/firm" class="btn btn-danger">去结算</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--底部-->
+<%-include('footer')%>
+</body>
+<script src="/javascripts/jquery-3.2.1.min.js"></script><!--jquery-->
+<script src="/bootstrap-3.3.7/js/bootstrap.js"></script><!--bootstrap官方js-->
+</html>

@@ -1,0 +1,39 @@
+body{
+    background-color: #f2f2f2;
+}
+section{
+    margin-top: 70px;
+    height:400px;
+    background-color: #ffffff;
+}
+#login{
+    font-size: 20px;
+    margin-top: 20px;
+    position: absolute;
+    margin-left: 50px;
+}
+#right{
+    margin-left: 760px;
+    margin-top: 20px;
+    position: absolute
+}
+.form-control{
+    height: 40px;
+    width: 350px
+}
+#inputEmail3{
+    margin-top: -10px;
+
+}
+button{
+    width: 350px;
+    height: 40px;
+}
+#img{
+    margin-top: 40px;
+}
+#btn{
+    text-align: center;
+    color: gray;
+    margin-top: 10px;
+}
