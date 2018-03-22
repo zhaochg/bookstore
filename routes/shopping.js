@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const Shopping_car = require('../controllers/shopping_car');
 
 /**
  * 结算页
@@ -19,5 +20,11 @@ router.get('/firm',function (req,res,next) {
 router.get('/pay',function (req,res,next) {
     res.render('pay');
 });
+
+/**
+ * 加入购物车
+ */
+router.post('/shopping',Shopping_car.get);
+
 
 module.exports = router;

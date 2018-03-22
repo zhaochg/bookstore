@@ -20,24 +20,28 @@
 
     <hr>
     <div class="col-md-5 col-md-offset-1">
-        <form class="form-horizontal" action="/users/register" method="post">
+        <form class="form-horizontal" action="/users/register" method="post" onsubmit="return checkForm()">
 
             <div class="form-group">
-                <input type="text" class="form-control" id="inputEmail3" placeholder="请输入邮箱" name="username">
+                <input type="text" class="form-control" name="email" id="email" placeholder="请输入邮箱" name="username">
+                <div class="hint" id="email-err" style="color: red;"></div>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="inputEmail4" placeholder="请输入昵称" name="username">
+                <input type="text" class="form-control" name="nickname" id="nickname" placeholder="请输入昵称" name="username">
+                <div class="hint" id="nickname-err" style="color: red;"></div>
             </div>
             <div class="form-group help">
-                <input type="password" class="form-control" id="inputPassword3" placeholder="请输入密码" name="password">
+                <input type="password" class="form-control" name="password" id="password" placeholder="请输入密码" name="password">
+                <div class="hint" id="password-err" style="color: red;"></div>
                 <a href="#" class="fa fa-question-circle"></a> </div><div class="form-group help">
-                <input type="password" class="form-control" id="inputPassword3" placeholder="请确认密码" name="password">
+                <input type="password" class="form-control" name="repassword" id="repassword" placeholder="请确认密码" name="password">
+                <div class="hint" id="repassword-err" style="color: red;"></div>
                 <a href="#" class="fa fa-question-circle"></a> </div>
             <div class="form-group">
                 <div class="main-checkbox">
                     <input type="checkbox" value="None" id="checkbox1" name="check"/>
                     <label for="checkbox1"></label>
-                    <span class="text">记住<a href="#"><font color="red">《融智教育登录服务协议》</font></a></span>
+                    <span class="text">同意<a href="#"><font color="red">《融智教育登录服务协议》</font></a></span>
                 </div>
             </div>
             <div class="form-group">
@@ -55,5 +59,52 @@
 <script src="/javascripts/jquery-3.2.1.min.js"></script><!--jquery-->
 <script src="/bootstrap-3.3.7/js/bootstrap.js"></script><!--bootstrap官方js-->
 <script src="/javascripts/layer/layer.js"></script>
+<script>
+    $(function(){
+        var err='<%locals.err%>';
+        alert(err);
+    })
+    /**
+     * 表单验证
+     */
+    <!--表单验证-->
+    function checkForm(){
+       var email=$('#email').val();
+       var nickname=$('#nickname').val();
+       var password=$('#password').val();
+       var repassword=$('#repassword').val();
+        $("#repassword-err").html('');
+
+       var isSubmit=true;
+        $("#email-err").html('');
+        $("#nickname-err").html('');
+        $("#password-err").html('');
+
+       if(email==''){
+           $("#email-err").html('请输入您的邮箱');
+           isSubmit=false;
+       }
+        if(nickname==''){
+            $("#nickname-err").html('请输入您的昵称');
+            isSubmit=false;
+        }
+        if(password==''){
+            $("#password-err").html('请输入您的密码');
+            isSubmit=false;
+        }
+        if(repassword==''){
+            $("#repassword-err").html('请输入您的确认密码');
+            isSubmit=false;
+        }else if(repassword!==password){
+    $("#repassword-err").html('两次密码不一致');
+    }
+        return false;
+    }
+
+    if($("#chk11").is(':checked')==false){
+        layer.alert('请同意协议后注册')
+    }
+
+</script>
 </body>
 </html>
