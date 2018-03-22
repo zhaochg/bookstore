@@ -25,6 +25,7 @@ const locals=require('./middleware/local');
 
 const index = require('./routes/index');
 const users = require('./routes/users');
+const shopping = require('./routes/shopping');
 
 const app = express();
 
@@ -52,6 +53,7 @@ app.use(session({
 app.use('/', index);
 app.use('/index', index);
 app.use('/users', users);
+app.use('/shopping',shopping);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
