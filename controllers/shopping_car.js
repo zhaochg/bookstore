@@ -1,7 +1,7 @@
 // 注册
 const ShoppingCar ={
     // 注册
-    update:(req,res,next)=>{
+    get:(req,res,next)=>{
 
     },
 
