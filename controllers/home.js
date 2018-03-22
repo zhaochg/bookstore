@@ -2,10 +2,8 @@ const bookModel = require('../models/book');
 
 const Home = {
     // 首页
-<<<<<<< HEAD
-=======
 	// 我是赵晓蒙,刚刚修改了这个文件
->>>>>>> 807d8191998953542978e667a1db585c042a48a1
+
 
     index: (req, res, next) => {
 

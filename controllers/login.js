@@ -2,7 +2,7 @@
  * 登录页
  */
 const UserModel = require('../models/user');
-
+const md5=require('md5');
 const Login ={
     /**
      // 登录页
@@ -17,24 +17,29 @@ const Login ={
     login:(req,res,next)=>{
         //邮箱
         //密码
-       let email=req.boby.email;
-       let password=req.body.pasword;
+       let email=req.body.email;
+       let password=req.body.password;
         //登录验证
+       console.log(999999999);
        UserModel.findOne({email:email}).then(doc=>{
+
            if(doc){
                let user=doc;
-               if(user.password==password){
-                   req.session.loginUser=user;
+               if(user.password==md5(password)){
+                    req.session.loginUser=user;
                    res.redirect('/');
+
                }else{
-                   req.flash('error','邮箱错误');
+                   req.flash('error','密码错误');
                    res.redirect('/users/login');
                }
            }else{
                req.flash('error','邮箱不存在');
                res.redirect('/users/login');
             }
-           })
+           }).catch(err=>{
+               console.log(err);
+       })
 
     },
     logout:(req,res,next)=>{
