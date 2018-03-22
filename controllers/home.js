@@ -2,7 +2,6 @@ const bookModel = require('../models/book');
 
 const Home = {
     // 首页
-	// 我是赵晓蒙,刚刚修改了这个文件
 
     index: (req, res, next) => {
 
