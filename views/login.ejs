@@ -23,10 +23,10 @@
         <form class="form-horizontal" action="/users/login" method="post">
 
             <div class="form-group">
-                <input type="text" class="form-control" id="inputEmail3" placeholder="请输入邮箱" name="username">
+                <input type="text" class="form-control" id="email" placeholder="请输入邮箱" name="email">
             </div>
             <div class="form-group help">
-                <input type="password" class="form-control" id="inputPassword3" placeholder="请输入密码" name="password">
+                <input type="password" class="form-control" id="password" placeholder="请输入密码" name="password">
                 <a href="#" class="fa fa-question-circle"></a> </div>
             <div class="form-group">
                 <div class="main-checkbox">
@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <button class="btn btn-danger">登录</button>
+                <button type="submit" class="btn btn-danger">登录</button>
             </div>
         </form>
     </div>
@@ -50,5 +50,13 @@
 <script src="/javascripts/jquery-3.2.1.min.js"></script><!--jquery-->
 <script src="/bootstrap-3.3.7/js/bootstrap.js"></script><!--bootstrap官方js-->
 <script src="/javascripts/layer/layer.js"></script>
+<script>
+    $(function(){
+        var err='<%=locals.error%>';
+        if(err){
+            layer.msg(err);
+        }
+    })
+</script>
 </body>
 </html>

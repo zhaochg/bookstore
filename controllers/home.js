@@ -2,6 +2,11 @@ const bookModel = require('../models/book');
 
 const Home = {
     // 首页
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> f7c1440f749e88e74a382906298904dd3fd32165
     index: (req, res, next) => {
         let tui_List = '';
         let news_List = '';

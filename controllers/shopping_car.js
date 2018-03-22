@@ -1,8 +1,22 @@
-// 注册
+/**
+ * 购物车
+ */
+
+const ShoppingCarModel = require('../models/shopping_car');
+
 const ShoppingCar ={
+    //获取购物车详情
+    get:(req,res,next)=> {
+        let user = req.locals.ShoppingCarModel.find().then(doc => {
+            console.log("获取购物车详情成功" + doc);
+            res.render('/Shopping_car', {shoppingCarList: doc});
+        }).catch(err => {
+            console.log("获取购物车详情失败" + err);
+        });
+    },
     // 注册
     get:(req,res,next)=>{
-
+        
     },
 
     update:(req,res,next)=>{
@@ -15,6 +29,6 @@ const ShoppingCar ={
 
     },
 
-}
+};
 
 module.exports=ShoppingCar;
