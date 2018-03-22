@@ -4,35 +4,28 @@ const Home = {
     // 首页
     index: (req, res, next) => {
         let tui_List = '';
-        let news_List = '';
+        let news_List = res.locals.news_List;
         let ad_List = '';
+        let xiao_List = res.locals.xiao_List;
+        let  where={is_tui:1};
         //幻灯
         //推荐
-
-        bookModel.find().then(doc => {
+        bookModel.find(where).limit(8).sort({score:'desc'}).then(doc => {
             console.log('所有书籍'+doc);
             tui_List = doc;
+            //最新
+            res.render('index', {
+                tui_List:tui_List,
+                news_List:news_List,
+                xiao_List:xiao_List,
+            });
         }).catch(err => {
-            console.log('查询书籍失败'+ err);
+            console.log('查询推荐书籍失败'+ err);
         });
         //广告
 
-        //最新
-        bookModel.find().then(doc => {
-            console.log('所有书籍'+doc);
-            news_List = doc;
-        }).catch(err => {
-            console.log('查询书籍失败'+ err);
-        });
-        //排行榜（畅销榜、新书榜）
-
-
-        res.render('index', {
-            tui_List:tui_List,
-            news_List:news_List,
-
-        });
     },
+
 
     //分类页
     category: (req, res, next) => {

@@ -10,13 +10,13 @@ const ShoppingCar ={
         let user = res.locals.loginUser;
         ShoppingCarModel.find({user_id:user._id}).then(doc => {
             console.log("获取购物车详情成功" + doc);
-            res.render('/shopping', {shoppingCarList: doc});
+            res.render('Shopping_car', {shoppingCarList: doc});
         }).catch(err => {
             console.log("获取购物车详情失败" + err);
         });
     },
     // 加入购物车
-    get:(req,res,next)=>{
+    add:(req,res,next)=>{
         let user = res.locals.loginUser;
         let num = req.body.num;
         let book_id = req.body.book_id;

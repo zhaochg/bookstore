@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>在线书城登录页</title>
+    <title>在线书城注册页</title>
     <link rel="stylesheet" href="/bootstrap-3.3.7/css/bootstrap.min.css">
     <!--bootstrap官方样式-->
     <link rel="stylesheet" href="/stylesheets/normalize.css">
@@ -20,7 +20,7 @@
 
     <hr>
     <div class="col-md-5 col-md-offset-1">
-        <form class="form-horizontal" action="/users/register" method="post" onsubmit="return checkForm()">
+        <form class="form-horizontal" action="/users/register" method="post">
 
             <div class="form-group">
                 <input type="text" class="form-control" name="email" id="email" placeholder="请输入邮箱" name="username">
@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <button class="btn btn-success">注册</button>
+                <button type="submit" class="btn btn-success">注册</button>
             </div>
         </form>
     </div>
@@ -62,44 +62,44 @@
 <script>
     $(function(){
         var err='<%locals.err%>';
-        alert(err);
+
     })
     /**
      * 表单验证
      */
-    <!--表单验证-->
-    function checkForm(){
-       var email=$('#email').val();
-       var nickname=$('#nickname').val();
-       var password=$('#password').val();
-       var repassword=$('#repassword').val();
-        $("#repassword-err").html('');
-
-       var isSubmit=true;
-        $("#email-err").html('');
-        $("#nickname-err").html('');
-        $("#password-err").html('');
-
-       if(email==''){
-           $("#email-err").html('请输入您的邮箱');
-           isSubmit=false;
-       }
-        if(nickname==''){
-            $("#nickname-err").html('请输入您的昵称');
-            isSubmit=false;
-        }
-        if(password==''){
-            $("#password-err").html('请输入您的密码');
-            isSubmit=false;
-        }
-        if(repassword==''){
-            $("#repassword-err").html('请输入您的确认密码');
-            isSubmit=false;
-        }else if(repassword!==password){
-    $("#repassword-err").html('两次密码不一致');
-    }
-        return false;
-    }
+    // <!--表单验证-->
+    // function checkForm(){
+    //    var email=$('#email').val();
+    //    var nickname=$('#nickname').val();
+    //    var password=$('#password').val();
+    //    var repassword=$('#repassword').val();
+    //     $("#repassword-err").html('');
+    //
+    //    var isSubmit=true;
+    //     $("#email-err").html('');
+    //     $("#nickname-err").html('');
+    //     $("#password-err").html('');
+    //
+    //    if(email==''){
+    //        $("#email-err").html('请输入您的邮箱');
+    //        isSubmit=false;
+    //    }
+    //     if(nickname==''){
+    //         $("#nickname-err").html('请输入您的昵称');
+    //         isSubmit=false;
+    //     }
+    //     if(password==''){
+    //         $("#password-err").html('请输入您的密码');
+    //         isSubmit=false;
+    //     }
+    //     if(repassword==''){
+    //         $("#repassword-err").html('请输入您的确认密码');
+    //         isSubmit=false;
+    //     }else if(repassword!==password){
+    // $("#repassword-err").html('两次密码不一致');
+    // }
+    //     return false;
+    // }
 
     if($("#chk11").is(':checked')==false){
         layer.alert('请同意协议后注册')

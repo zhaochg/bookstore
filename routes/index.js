@@ -2,12 +2,14 @@ const express = require('express');
 const Home = require('../controllers/home');
 const router = express.Router();
 const ShoppingCar = require('../controllers/shopping_car');
-
+const auth = require('../middleware/auth');
+const book = require('../controllers/book');
+const ranking = require('../middleware/ranking');
 
 /**
  *首页
  */
-router.get('/', Home.index);
+router.get('/',ranking, Home.index);
 /**
  * 推荐好书
  */
@@ -28,13 +30,11 @@ router.get('/rank',Home.ranking);
 /**
  * 购物车
  */
-router.get('/shopping',ShoppingCar.index);
+router.get('/shopping',auth,ShoppingCar.index);
 /**
  * 图书详情
  */
-router.get('/bookInfor',function (req,res,next) {
-    res.render('bookInfor');
-});
+router.get('/bookInfor/:id',ranking ,book.get);
 /**
  * 个人中心
  */
