@@ -1,5 +1,4 @@
 const express = require('express');
-const Home = require('../controllers/shopping_car');
 const router = express.Router();
 
 /**

@@ -2,31 +2,42 @@ const bookModel = require('../models/book');
 
 const Home = {
     // 首页
-<<<<<<< HEAD
-=======
-	// 我是赵晓蒙,刚刚修改了这个文件
->>>>>>> 807d8191998953542978e667a1db585c042a48a1
-
     index: (req, res, next) => {
-
+        let tui_List = '';
+        let news_List = '';
+        let ad_List = '';
         //幻灯
         //推荐
+
         bookModel.find().then(doc => {
-
+            console.log('所有书籍'+doc);
+            tui_List = doc;
         }).catch(err => {
-
+            console.log('查询书籍失败'+ err);
         });
         //广告
+
         //最新
+        bookModel.find().then(doc => {
+            console.log('所有书籍'+doc);
+            news_List = doc;
+        }).catch(err => {
+            console.log('查询书籍失败'+ err);
+        });
         //排行榜（畅销榜、新书榜）
-        res.render('index', {});
+
+
+        res.render('index', {
+            tui_List:tui_List,
+            news_List:news_List,
+
+        });
     },
 
     //分类页
     category: (req, res, next) => {
         //分类列表
             res.render('classification');
-
         //分类书籍（分页）
 
         //按销量排序

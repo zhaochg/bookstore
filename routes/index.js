@@ -1,6 +1,8 @@
 const express = require('express');
 const Home = require('../controllers/home');
 const router = express.Router();
+const ShoppingCar = require('../controllers/shopping_car');
+
 
 /**
  *首页
@@ -26,9 +28,7 @@ router.get('/rank',Home.ranking);
 /**
  * 购物车
  */
-router.get('/shopping',function (req,res,next) {
-    res.render('Shopping_car');
-});
+router.get('/shopping',ShoppingCar.index);
 /**
  * 图书详情
  */

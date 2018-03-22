@@ -6,8 +6,8 @@ const ShoppingCarModel = require('../models/shopping_car');
 
 const ShoppingCar ={
     //获取购物车详情
-    get:(req,res,next)=> {
-        let user = req.locals.ShoppingCarModel.find().then(doc => {
+    index:(req,res,next)=> {
+        ShoppingCarModel.find().then(doc => {
             console.log("获取购物车详情成功" + doc);
             res.render('/Shopping_car', {shoppingCarList: doc});
         }).catch(err => {
@@ -16,7 +16,7 @@ const ShoppingCar ={
     },
     // 注册
     get:(req,res,next)=>{
-        
+
     },
 
     update:(req,res,next)=>{
