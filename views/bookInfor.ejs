@@ -30,12 +30,12 @@
         <div class="col-md-9">
             <div class="row">
                 <div class="col-md-2">
-                    <img src="./images/65465465.jpg">
+                    <img src="/images/65465465.jpg">
                 </div>
                 <div class="col-md-4">
-                    <h4>本草纲目</h4>
+                    <h4><%= book.name%></h4>
                     <small>类别：</small>&nbsp;&nbsp;&nbsp;<strong>文学艺术>诗词歌赋</strong><br>
-                    <small>作者：</small>&nbsp;&nbsp;&nbsp;<strong>李时珍</strong><br>
+                    <small>作者：</small>&nbsp;&nbsp;&nbsp;<strong><%=author.name%></strong><br>
                     <small>版权提供：</small>&nbsp;&nbsp;&nbsp;<strong>中华人民第一出版社</strong><br>
                     <div class="count clearfix">
                         <button id="min" class="btn"><span class="glyphicon glyphicon-minus"></span></button>
@@ -59,18 +59,7 @@
                 </div>
                 <hr>
                 <div class="textBody">
-                    &nbsp;&nbsp;&nbsp;&nbsp;《本草纲目》，本草著作，52卷。明代李时珍(东璧)撰于嘉靖三十一年(1552年)至万历六年(1578年)，
-                    稿凡三易。此书采用“目随纲举”编写体例，故以“纲目”名书。以《证类本草》为蓝本加以变革。序例(卷1、2)
-                    相当于总论，述本草要籍与药性理论。卷1“历代诸家本草”，介绍明以前主要本草41种。次辑录明代以前有关
-                    药物气味阴阳、五味宜忌、标本阴阳、升降浮沉、补泻、引经报使、各种用药禁忌等论述，其中又以金元诸家
-                    之论居多。卷3～4为“百病主治药”，沿用《证类本草》“诸病通用药”旧例，以病原为纲罗列主治药名及主要功
-                    效，相当于一部临证用药手册。卷5～52为各论，收药1892种，附图1109种。其总例为“不分三品，惟逐各部；
-                    物以类从，目随纲举。”其中以部为“纲”，以类为“目”，计分16部(水、火、土、金石、草、谷、菜、果、木、
-                    服器、虫、鳞、介、禽、兽、人)60类。各部按“从微至巨”、“从贱至贵”，既便检索，又体现出生物进化发展
-                    思想。部之下为60类，各类中常将许多同科属生物排列在一起。各药“标名为纲，列事为目”，即一药名下列8
-                    个项目(即“事”)。其中“释名”列举别名，解释命名意义；“集解”，介绍药物出产、形态、采收等；“辨疑”(或
-                    “正误”)，类集诸家之说，辨析纠正药物疑误；“修治”，述炮炙方法；“气味”、“主治”、“发明”，阐述药性理
-                    论，提示用药要点，其下每多作者个人见解；“附方”，以病为题，附列相关方剂。
+                    &nbsp;&nbsp;&nbsp;&nbsp;<%= book.content%>
                 </div>
                 <!--基本信息-->
                 <div class="bookDetails01">
@@ -85,7 +74,7 @@
                         </tr>
                         <tr>
                             <td>作者：</td>
-                            <td>李时珍</td>
+                            <td><%= author.name%></td>
                         </tr>
                         <tr>
                             <td>版权提供：</td>
@@ -103,8 +92,7 @@
                 </div>
                 <hr>
                 <div class="textBody">
-                    &nbsp;&nbsp;&nbsp;&nbsp;李时珍念本草一书历代注解者谬误亦多，遂考古证今，辨疑订误，
-                    广采博收群书，在宋代唐慎微《经史证类备急本草》基础上编成此书。
+                    &nbsp;&nbsp;&nbsp;&nbsp;<%= author.content%>
                 </div>
                 <!--图书评论-->
                 <div class="bookDetails01">
@@ -120,7 +108,7 @@
                         <span class="glyphicon glyphicon-star"></span>
                         <span class="glyphicon glyphicon-star"></span>
                     </div>
-                    <img src="./images/txicon.jpg">
+                    <img src="/images/txicon.jpg">
                     <strong>牛牛</strong><br>
                     <div class="comment-text">很好看呢的呢</div>
                     <div class="text-right">time</div>
@@ -134,7 +122,7 @@
                         <span class="glyphicon glyphicon-star"></span>
                         <span class="glyphicon glyphicon-star"></span>
                     </div>
-                    <img src="./images/txicon.jpg">
+                    <img src="/images/txicon.jpg">
                     <strong>牛牛</strong><br>
                     <div class="comment-text">很好看呢的呢</div>
                     <div class="text-right">time</div>
