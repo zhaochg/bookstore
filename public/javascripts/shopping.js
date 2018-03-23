@@ -1,5 +1,6 @@
 $(function(){
 //获得文本框对象
+    var pice = '';
     var t = $("#text_box");
 //数量增加操作
     $("#add").click(function(){
@@ -19,7 +20,7 @@ $(function(){
     })
 //计算操作
     function setTotal(){
-        $("#total").html((parseInt(t.val())*3.95).toFixed(2));//toFixed()是保留小数点的函数很实用哦
+        $("#total").html((parseInt(t.val())*pice).toFixed(2));//toFixed()是保留小数点的函数很实用哦
     }
 //初始化
     setTotal();

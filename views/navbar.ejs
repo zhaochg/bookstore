@@ -22,13 +22,21 @@
                     <li class=""><a href="/">首页</a></li>
                     <li><a href="/classification">分类</a></li>
                     <li><a href="/rank">排行榜</a></li>
+                    <% if (user){%>
                     <li><a href="/personal">个人中心</a></li>
+                    <% }%>
                 </ul>
                 <!-- 登录登出 -->
+                <% if (user){%>
+                <p class="navbar-text navbar-right">
+                    <a href="/users/loginOut" class="navbar-link">登出</a>&nbsp;
+                </p>
+                <% }else {%>
                 <p class="navbar-text navbar-right">
                     <a href="/users/login" class="navbar-link">登录</a>&nbsp;
                     <a href="/users/register" class="navbar-link">注册</a>
                 </p>
+                <%}%>
                 <!-- 搜索 -->
                 <form class="navbar-form navbar-right">
                     <div class="form-group">
@@ -40,10 +48,13 @@
                 <div class="navbar-right">
                     <a href="/shopping" class="btn btn-info navbar-btn">
                         <span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;购物车
-                        <span class="badge">10</span>
+                        <% if (shoppingCar){%>
+                        <span class="badge"><%=shoppingCar%></span>
+                        <% }%>
                     </a>
                 </div>
             </div>
+
         </div>
     </nav>
     <!--导航结束 -->
@@ -53,3 +64,4 @@
         color: red;
     }
 </style>
+<script src="/javascripts/navbar.js"></script>
