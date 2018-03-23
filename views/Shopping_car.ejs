@@ -32,6 +32,7 @@
     <!--表格-->
     <div class="container-fluid">
         <div class="text-danger"><h4>我的购物车</h4></div>
+        <%if(shoppingCarList.length > 0){%>
         <table class="table table-striped">
             <tr>
                 <td>
@@ -47,6 +48,7 @@
                 <th>小计</th>
                 <th>操作</th>
             </tr>
+            <% for (var i = 0;i<shoppingCarList.length;i++){%>
             <tr>
                 <td>
                     <div class="checkbox">
@@ -56,16 +58,16 @@
                     </div>
                 </td>
                 <td>
-                    <img src="/images/54654654.jpg" alt="">
-                    <p>小道德方寸之间</p>
+                    <img src="/images/54654654.jpg">
+                    <p><%= shoppingCarList[i].book_id.name%></p>
                 </td>
-                <td>￥0.00</td>
+                <td><%= shoppingCarList[i].book_id.price%></td>
                 <td>
                     <div class="input-group">
                               <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">+</button>
                               </span>
-                        <input type="text"  maxlength="3" class="form-control" placeholder="1">
+                        <input type="text" maxlength="3" class="form-control" value="<%= shoppingCarList[i].num%>">
                         <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">-</button>
                               </span>
@@ -88,6 +90,12 @@
                 <td>共3本，合计3.00元</td>
                 <td></td>
             </tr>
+            <% }%>
+            <%}else {%>
+            <div class="text-center">
+                <h1>空空如也</h1>
+            </div>
+            <% }%>
         </table>
         <div class="fl">
             <a href="/">再逛逛</a>
