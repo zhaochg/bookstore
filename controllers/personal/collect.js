@@ -1,9 +1,9 @@
+const collectModel = require('../models/book');
 // 收藏
 const Collect = {
-    // 列表
+        // 列表
     index:(req,res,next) => {
         // 列表分页
-
     },
     //添加收藏
     add:(req,res,next) => {
@@ -13,7 +13,5 @@ const Collect = {
     delete:(req,res,next) => {
         //收藏id、书籍id、用户id
     },
-
-
 };
-    module.export =Collect
+    module.export =Collect;
