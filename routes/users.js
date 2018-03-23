@@ -16,6 +16,10 @@ router.get('/register',Register.index);
 
 router.post('/register',Register.regisder);
 
+/**
+ * 登出
+ */
+router.get('logout', Login.logout);
 
 
 module.exports = router;

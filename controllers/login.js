@@ -20,13 +20,12 @@ const Login ={
        let email=req.body.email;
        let password=req.body.password;
         //登录验证
-       console.log(999999999);
        UserModel.findOne({email:email}).then(doc=>{
-
            if(doc){
                let user=doc;
                if(user.password==md5(password)){
                     req.session.loginUser=user;
+                   req.flash('error', '登录成功！');
                    res.redirect('/');
 
                }else{
