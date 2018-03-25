@@ -12,6 +12,11 @@
                 <td><%=xiao_List[i].name.substr(0,3)+'...'%></td>
                 <td class="text-danger">￥<%=xiao_List[i].price%></td>
             </tr>
+            <tr>
+                <td></td>
+                <td><%=xiao_List[i].author_id.name%></td>
+                <td></td>
+            </tr>
             <% } %>
         </table>
         <div class="text-right">
@@ -25,6 +30,11 @@
                 <td><%='0'+(i+1)%></td>
                 <td style="width: 20em;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"><%=news_List[i].name%></td>
                 <td class="text-danger">￥<%=news_List[i].price%></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><%=news_List[i].author_id.name%></td>
+                <td></td>
             </tr>
             <% } %>
         </table>

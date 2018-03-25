@@ -37,23 +37,21 @@
             </div>
         </div>
         <div id="three">
+            <% for (var i = 0; i<user.address.length;i++){%>
             <div class="form-group fl">
                 <div class="radio">
                     <label>
-                        <input type="radio" name="optionsRadios"  value="option1" checked>
-                        河南省郑州市王牛牛收
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="optionsRadios"  value="option1">
-                        河南省郑州市王牛牛收
+                        <input type="radio" name="address"  value="<%=i%>" checked>
+                        <%=user.address[i].address%>
                     </label>
                 </div>
             </div>
+            <%if(i == 0){%>
             <div class="fr">
                 <a href="">默认地址</a>
             </div>
+            <%}%>
+            <%}%>
         </div>
 
 
@@ -68,21 +66,21 @@
                 </tr>
                 <tr>
                     <td>
-                        <img src="./images/54654654.jpg" alt="">
-                        <h5>小道德方寸之间</h5>
+                        <img src="/uploads/<%=bookInfor.img%>">
+                        <h5><%= bookInfor.name%></h5>
                     </td>
-                    <td>￥0.00</td>
+                    <td>￥<%= bookInfor.price%></td>
                     <td>
-                        1
+                        <%= num%>
                     </td>
-                    <td>￥0.00</td>
+                    <td>￥<%= num*bookInfor.price%></td>
 
                 </tr>
                 <tr>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td>共3本，合计3.00元</td>
+                    <td>共<%= num%>本，合计<%= num*bookInfor.price%>元</td>
                 </tr>
             </table>
             <div class="fl">

@@ -9,11 +9,10 @@ const Book ={
         let id = req.params.id;
         let news_List = res.locals.news_List;
         let xiao_List = res.locals.xiao_List;
-        let user = res.locals.user;
+        let user = res.locals.loginUser;
         let shoppingCar = res.locals.shopping;
-        bookModel.findOne({_id:id}).then(doc=>{
+        bookModel.findOne({_id:id}).populate('author_id').then(doc=>{
             console.log('查询书籍详情成功');
-
             let author = doc.author_id;
             res.render('bookInfor',{
                 book:doc,

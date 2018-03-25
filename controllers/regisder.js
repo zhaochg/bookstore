@@ -25,11 +25,11 @@ const Regisder ={
            password: md5(password),
            repassword:md5(repassword)
        }).then(doc=>{
-          req.flash('msg','注册成功')
+          req.flash('msg','注册成功');
            res.redirect('/users/login');
        }).catch(err=>{
-            req.flash('err','注册失败')
-           res.redirect('/register')
+            req.flash('err','注册失败');
+           res.redirect('/register');
 
        })
         //登录操作

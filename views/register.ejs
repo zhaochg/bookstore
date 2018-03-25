@@ -62,8 +62,7 @@
 <script>
     $(function(){
         var err='<%locals.err%>';
-
-    })
+    });
     /**
      * 表单验证
      */
@@ -99,11 +98,12 @@
     // $("#repassword-err").html('两次密码不一致');
     // }
     //     return false;
+    // if($("#chk11").is('checked')==false){
+    //     layer.alert('请同意协议后注册');
+    // }
     // }
 
-    if($("#chk11").is(':checked')==false){
-        layer.alert('请同意协议后注册')
-    }
+
 
 </script>
 </body>

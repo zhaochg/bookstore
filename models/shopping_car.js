@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+const Book = require('./book');
+const User = require('./user');
 /**
  *购物车模型
  */

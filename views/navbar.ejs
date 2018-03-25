@@ -29,7 +29,8 @@
                 <!-- 登录登出 -->
                 <% if (user){%>
                 <p class="navbar-text navbar-right">
-                    <a href="/users/loginOut" class="navbar-link">登出</a>&nbsp;
+                    <a href="/users/loginOut" class="navbar-link">登出</a>
+                    <span class="text-danger">欢迎您，<%= user.nickname%></span>
                 </p>
                 <% }else {%>
                 <p class="navbar-text navbar-right">
@@ -64,4 +65,3 @@
         color: red;
     }
 </style>
-<script src="/javascripts/navbar.js"></script>
