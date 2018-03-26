@@ -6,9 +6,11 @@ const md5=require('md5');
 const User ={
     // 用户信息
     index:(req,res,next)=>{
-        let user = req.session.loginUser;
+        let shoppingCar =res.locals.shopping;
+        let user = res.locals.loginUser;
         console.log(user);
         res.render('personal', {
+            shoppingCar:shoppingCar,
             user: user
         });
     },

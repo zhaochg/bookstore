@@ -17,9 +17,9 @@ router.get('/address',auth,address.index);
 //添加地址
 router.post('/addAddress',address.add);
 //更改地址
-router.post('/updateAddress',auth,address.update);
+// router.post('/updateAddress',auth,address.update);
 //删除地址
-router.post('/del',auth,address.delete);
+// router.post('/del',auth,address.delete);
 
 
 

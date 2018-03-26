@@ -25,12 +25,10 @@
                     <li><a href="/personal">个人中心</a></li>
                 </ul>
                 <!-- 登录登出 -->
-<<<<<<< HEAD
+
                 <p class="navbar-text navbar-right" id="login">
                 <% if (user){%>
-=======
-                <% if (user){ %>
->>>>>>> 07fe7f41d09d13fb0a43004df1601b4712b779f7
+
                 <p class="navbar-text navbar-right">
                     <a href="/users/loginOut" class="navbar-link">登出</a>
                     <span class="text-danger">欢迎您，<%= user.nickname %></span>
@@ -51,15 +49,11 @@
                 </form>
                 <!-- 购物车 -->
                 <div class="navbar-right">
-                    <a href="shopping" class="btn btn-info navbar-btn">
+                    <a href="/shopping" class="btn btn-info navbar-btn">
                         <span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;购物车
-<<<<<<< HEAD
-
-=======
                         <% if(shoppingCar){ %>
                         <span class="badge"><%= shoppingCar%></span>
                         <% } %>
->>>>>>> 07fe7f41d09d13fb0a43004df1601b4712b779f7
                     </a>
                 </div>
             </div>
@@ -71,7 +65,7 @@
     #navbar-ex1-collapse ul li a:hover {
         color: red;
     }
-<<<<<<< HEAD
+
     #login a{
         color: red;
     }
@@ -84,6 +78,4 @@
 </style>
 <script src="/javascripts/navbar.js"></script>
 
-=======
-</style>
->>>>>>> 07fe7f41d09d13fb0a43004df1601b4712b779f7
+

@@ -1,4 +1,5 @@
 const bookModel = require('../models/book');
+const CategoryModel = require('../models/category');
 
 const Home = {
     // 首页
@@ -26,22 +27,70 @@ const Home = {
             console.log('查询推荐书籍失败'+ err);
         });
         //广告
-
     },
-
-
     //分类页
     category: (req, res, next) => {
+
         //分类列表
+        //分类书籍（分页，销量，评分，时间）
         let user = res.locals.loginUser;
         let shoppingCar = res.locals.shopping;
-            res.render('classification',{
-                user:user,
-                shoppingCar:shoppingCar
-            });
-        //分类书籍（分页）
+        let pname = req.query.pname;//当前父分类名字
+        let cname = req.query.cname;//当前子分类名字
+        let cid = req.query.cid;//当前子分类id
 
-        //按销量排序
+        let order_cnt = req.query.order_cnt ? req.query.order_cnt : 0;//订单数量
+        let price = req.query.price ? req.query.price : 0;//价格
+        let page = req.query.page ? req.query.page : 1;//页数
+
+        let count = 0;
+        let limit = 12;
+        let totalPage = 0;
+        let where = {};
+        let sort = {};
+
+        let pageInfo = {page: page, order_cnt: order_cnt, price: price};//三个数据集
+        if (pname && cname && cid) {
+            pageInfo.pname = pname;
+            pageInfo.cname = cname;
+            pageInfo.cid = cid;
+        }
+        if (order_cnt != 0 && order_cnt == 1 || order_cnt == -1) {//订单
+            sort.order_cnt = order_cnt;
+        }
+        if (price != 0 && price == 1 || price == -1) {//价格
+            sort.price = price;
+        }
+        if (pname && cname && cid) {//分类id
+            where.category_id = cid
+        }
+        // $ne表示不相等
+        const CategoryFun = CategoryModel.find({category: {$ne: []}}).populate('category');//类别
+        const BookCount = bookModel.find(where).count();//数量
+        const BookFun = bookModel.find(where).populate('author_id').skip((page - 1) * limit).limit(limit).sort(sort); //推荐
+        // 并行加载
+        Promise.all([CategoryFun, BookCount, BookFun]).then(([categoryData, countData, BookData]) => {
+            count = countData;
+            totalPage = Math.ceil(count / limit);
+            pageInfo.count = count;
+            pageInfo.totalPage = totalPage;
+            console.log('111'+categoryData);
+            console.log('222'+BookData);
+            console.log('333'+pageInfo);
+            res.render("classification", {
+                user:user,
+                shoppingCar:shoppingCar,
+                title: "图书分类",
+                category: categoryData,
+                bookData: BookData,
+                pageInfo: pageInfo,
+            });
+        }).catch(reject => {
+            res.json({
+                status: 0,
+                msg: '网络异常'
+            });
+        })
 
     },
 
@@ -152,7 +201,6 @@ const Home = {
                     shoppingCar:shoppingCar,
                     news_List:news_List,
                     xiao_List:xiao_List,
-
                     new_List:doc,
                     count:count,
                     totalPage:totalPage,

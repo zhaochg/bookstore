@@ -9,6 +9,7 @@ const CategorySchema = new Schema({
       type:String,
       default:''
     },
+    category:[],
     sort:{
         type:Number,
         default:0
