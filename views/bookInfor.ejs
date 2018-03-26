@@ -37,14 +37,16 @@
                     <small>类别：</small>&nbsp;&nbsp;&nbsp;<strong>文学艺术>诗词歌赋</strong><br>
                     <small>作者：</small>&nbsp;&nbsp;&nbsp;<strong><%=author.name%></strong><br>
                     <small>版权提供：</small>&nbsp;&nbsp;&nbsp;<strong>中华人民第一出版社</strong><br>
-                    <div class="count clearfix">
-                        <button id="min" class="btn"><span class="glyphicon glyphicon-minus"></span></button>
-                        <input id="text_box" value="1" disabled>
-                        <button id="add" class="btn"><span class="glyphicon glyphicon-plus"></span></button>
-                    </div>
-                    <small>总价：</small><strong id="total"></strong><strong>￥</strong><br>
-                    <button class="btn btn-danger">加入购物车</button>
-                    <button class="btn btn-default">立即购买</button>
+                    <form action="/shopping/add" method="post" onsubmit="addShopping()">
+                        <div class="count clearfix">
+                            <button type="button" id="min" class="btn"><span class="glyphicon glyphicon-minus"></span></button>
+                            <input type="text" id="num" value="1" name="num">
+                            <input type="hidden" value="<%=book._id%>" id="book" name="book_id">
+                            <button type="button" id="add" class="btn"><span class="glyphicon glyphicon-plus"></span></button>
+                        </div>
+                        <button type="submit" class="btn btn-danger">加入购物车</button>
+                        <a id="pay" href="" class="btn btn-default">立即购买</a>
+                    </form>
                 </div>
             </div>
             <!--简介-->
@@ -142,5 +144,38 @@
 </body>
 <script src="/javascripts/jquery-3.2.1.min.js"></script><!--jquery-->
 <script src="/bootstrap-3.3.7/js/bootstrap.js"></script><!--bootstrap官方js-->
-<script src="/javascripts/shopping.js"></script>
+<script src="/javascripts/layer/layer.js"></script>
+<script>
+    //提示信息
+    $(function(){
+        var err='<%=locals.error%>';
+        if(err){
+            layer.msg(err);
+        }
+    //获得文本框对象
+        var t = $("#num");
+        var id = $('#book').val();
+    //数量增加操作
+        $("#add").click(function(){
+            t.val(parseInt(t.val())+1)
+            if (parseInt(t.val())!=1){
+                $('#min').attr('disabled',false);
+            }
+            $("#pay").attr('href','/shopping/balance?book_id='+id+'&num='+t.val());
+        });
+    //数量减少操作
+        $("#min").click(function(){
+            t.val(parseInt(t.val())-1);
+            if (parseInt(t.val())==1){
+                $('#min').attr('disabled',true);
+            }
+            $("#pay").attr('href','/shopping/balance?book_id='+id+'&num='+t.val());
+        });
+        $("#pay").attr('href','/shopping/balance?book_id='+id+'&num='+t.val());
+    });
+</script>
+<script>
+
+</script>
+
 </html>

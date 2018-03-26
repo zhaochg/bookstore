@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const author = require('./author');
 const Schema = mongoose.Schema;
 
 /**

@@ -25,16 +25,9 @@
 </div>
 <div class="container">
     <div class="row" >
-        <div class="col-md-2 col-sm-2" style=" background: white ;margin-left: 0px; margin-right: 0px ;margin-top: 3%;padding:2%">
-            <style>
-
-                #myTab li {
-                    text-align: center;
-                    height: auto;
-                }
-            </style >
+        <div class="col-md-2 col-sm-2 text-center" style=" background: white ;margin-left: 0px; margin-right: 0px ;margin-top: 3%;padding:2%">
             <ul class="nav nav-pills nav-stacked"  id="myTab">
-                <li class="in active "><a href="#f1" data-toggle="tab" >
+                <li class="in active "><a href="#f1" data-toggle="tab">
                         <p>
                             图书分类
                         </p>
@@ -90,14 +83,14 @@
                 </li>
             </ul>
         </div>
-        <div class="col-md-9 col-sm-9 col-md-offset-1" >
+        <div class="col-md-9 col-sm-9 col-md-offset-1">
             <ol class="breadcrumb" style="background: rgb(212,212,212);margin-top: 60px;">
                 <li>最近上架：</li>
                 <button type="button" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-chevron-up" aria-hidden="true">价格</span>
+                    <span class="glyphicon glyphicon-chevron-up">价格</span>
                 </button>
                 <button type="button" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true">价格</span>
+                    <span class="glyphicon glyphicon-chevron-down">价格</span>
                 </button>
             </ol>
             <div id="myTabContent" class="tab-content">
@@ -550,7 +543,7 @@
                         </div>
                     </div>
                 </div>
-                <div class=" tab-pane fade" id="f5">
+                <div class="tab-pane fade" id="f5">
                     <!--最近上架-->
                     <div class="row">
                         <div class="col-md-10">
@@ -1005,27 +998,18 @@
                 </p>
                 </div>
             </div>
-        </div>`
-        <script>
-            $(function () {
-                $('#myTab li:eq(0) a').tab('show');
-
-            });
-        </script>
+        </div>
     </div>
 </div>
-</body>
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script>
-    $(function () {
-        $('#myTab li:eq(0) a').tab('show');
-    });
-</script>
 
 <!--底部-->
 <%-include('footer')%>
 </body>
 <script src="/javascripts/jquery-3.2.1.min.js"></script><!--jquery-->
 <script src="/bootstrap-3.3.7/js/bootstrap.js"></script><!--bootstrap官方js-->
+<script>
+    $(function () {
+        $('#myTab li:eq(0) a').tab('show');
+    });
+</script>
 </html>

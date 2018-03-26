@@ -102,13 +102,33 @@ const Home = {
         let xiao_List = res.locals.xiao_List;
         let user = res.locals.loginUser;
         let shoppingCar = res.locals.shopping;
-        res.render('recommend',{
-            user:user,
-            shoppingCar:shoppingCar,
-            news_List:news_List,
-            xiao_List:xiao_List
+        //分页
+        let count = 0;
+        let limit = 8;
+        let page = req.query.page?req.query.page:1;
+        let totalPage = 0;
+        let where = {};
+        bookModel.find(where).count().then(doc => {
+            count = doc;
+            totalPage=Math.ceil(count/limit);
+            bookModel.find(where).populate('author_id').skip((page-1)*limit).limit(limit).sort({order_cnt:"desc"}).then(doc => {
+                res.render('recommend',{
+                    user:user,
+                    shoppingCar:shoppingCar,
+                    news_List:news_List,
+                    xiao_List:xiao_List,
+
+                    chang_List:doc,
+                    count:count,
+                    totalPage:totalPage,
+                    page:page
+                });
+            }).catch(err => {
+                console.log('查询畅销书籍失败'+err);
+            });
+        }).catch(err => {
+            console.log('查询畅销书籍总数失败'+err);
         });
-        //排行榜
     },
 
     news: (req, res, next) => {
@@ -117,15 +137,33 @@ const Home = {
         let xiao_List = res.locals.xiao_List;
         let user = res.locals.loginUser;
         let shoppingCar = res.locals.shopping;
-        res.render('newBooks',{
-            user:user,
-            shoppingCar:shoppingCar,
-            news_List:news_List,
-            xiao_List:xiao_List
-        });
-        //书籍列表
+        //分页
+        let count = 0;
+        let limit = 8;
+        let page = req.query.page?req.query.page:1;
+        let totalPage = 0;
+        let where = {};
+        bookModel.find(where).count().then(doc => {
+            count = doc;
+            totalPage=Math.ceil(count/limit);
+            bookModel.find(where).populate('author_id').skip((page-1)*limit).limit(limit).sort({create_at:"desc"}).then(doc => {
+                res.render('newBooks',{
+                    user:user,
+                    shoppingCar:shoppingCar,
+                    news_List:news_List,
+                    xiao_List:xiao_List,
 
-        //排行榜
+                    new_List:doc,
+                    count:count,
+                    totalPage:totalPage,
+                    page:page
+                });
+            }).catch(err => {
+                console.log('查询畅销书籍失败'+err);
+            });
+        }).catch(err => {
+            console.log('查询畅销书籍总数失败'+err);
+        });
     },
 
     // 搜索

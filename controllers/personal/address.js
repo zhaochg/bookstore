@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const AddressModel = require('../../models/user');
 
 const Address = {
@@ -53,19 +54,46 @@ const Address = {
 
         });
 
+=======
+const AddressModel=require('../models/user');
+/**
+ * 地址
+ */
+const Address={
+    /**
+     * 地址列表
+     **/
+    index:(req,res,next)=>{
 
     },
-    // 修改地址
-    update:(res,req,next)=>{
-        // id下标----------------------  user.addess
-        // 姓名
-        // 手机号
-        // 地址
-    },
-    // 删除地址
-    delete:(res,req,next)=>{
+    /**
+     * 添加地址
+     */
+    add:(req,res,next)=>{
+        //姓名
+        //手机号
+        //地址
+>>>>>>> 07fe7f41d09d13fb0a43004df1601b4712b779f7
 
     },
+    /**
+     * 修改地址
+     */
+    update:(req,res,next)=>{
+        //下标
+        //姓名
+        //手机号
+        //地址
+
+    },
+    /**
+     * 删除地址
+     */
+    delete:(req,res,next)=>{
+        //状态
+
+    },
+
+
 };
-
-module.exports = Address;
+module.exports=Address;
