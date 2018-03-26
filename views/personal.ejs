@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>个人中心</title>
-    <link rel="stylesheet" href="/bootstrap-3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bootstrap-3.3.7/css/bootstrap.css">
     <!--bootstrap官方样式-->
     <link rel="stylesheet" href="/stylesheets/normalize.css">
     <!--强跨浏览器表现的一致性css 重置样式-->
@@ -68,10 +68,14 @@
 </body>
 <script src="/javascripts/jquery-3.2.1.min.js"></script><!--jquery-->
 <script src="/bootstrap-3.3.7/js/bootstrap.js"></script><!--bootstrap官方js-->
+<script src="/javascripts/layer/layer.js"></script><!--layer.js-->
+<script src="/javascripts/set.js"></script><!--自用js-->
+<script src="/javascripts/address.js"></script><!--自用js-->
+<script src="/javascripts/privacy.js"></script><!--自用js-->
+
 <script>
     $(function () {
-        $('#myTab li:eq(0) a').tab('show');
-
+        $('#myTab li:eq(0) a').tab('show').fadeIn(3000);
     });
 </script>
 </html>

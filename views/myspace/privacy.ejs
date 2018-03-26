@@ -1,12 +1,46 @@
-<div class="row">
-    <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-            <img src="/images/54654654.jpg" >
-            <div class="caption">
-                <h3>隐私设置</h3>
-                <p>...</p>
-                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+<!--隐私设置-->
+<table class="table table-hover">
+    <tr>
+        <th>
+            个人隐私设置
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <p>
+                <a href="#" class="btn btn-primary" role="button"  data-toggle="modal" data-target="#myModal03">点此修改您的登录密码</a>
+            </p>
+        </td>
+    </tr>
+</table>
+<!--编辑资料模态框-->
+<div class="modal fade" id="myModal03" tabindex="1">
+    <div class="modal-dialog">
+        <form>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">修改密码</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="nickname">原密码</label>
+                        <input type="text" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <label for="shengri">新密码</label>
+                        <input type="text" class="form-control" id="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="ziwo">再次输入新密码</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="updateUser1()" type="button" class="btn btn-warning" data-dismiss="modal">保存</button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>

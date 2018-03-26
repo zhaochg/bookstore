@@ -137,7 +137,6 @@
                                                 &nbsp;|&nbsp;
                                                 <div class="fr"><i class="iconfont icon-xin"></i><p>收藏</p></div>
                                                 <input type="hidden"  value="<%=alt%>" id="alt">
-                                                <input type="hidden"  value="<%=alt%>" id="alt">
                                             </div>
                                         </div>
                                     </div>
@@ -151,7 +150,7 @@
                                     <ul class="pagination">
                                         <%if(pagex > 1){%>
                                         <li>
-                                            <a href="/rank/?pagex=<%=parseInt(pagex)-1%>&alt=1 aria-label="Previous">
+                                            <a href="/rank/?pagex=<%=parseInt(pagex)-1%>&alt=1" aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>
                                             </a>
                                         </li>
@@ -192,7 +191,7 @@
         console.log(alt)
 
         if(!alt){
-            console.log(222222222222222)
+            console.log(222222)
             $('#myTab li:eq(0) a').tab('show');
         }else{
             console.log(444444)

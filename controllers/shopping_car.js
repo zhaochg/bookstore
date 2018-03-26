@@ -8,9 +8,14 @@ const ShoppingCar ={
     //获取购物车详情
     index:(req,res,next)=> {
         let user = res.locals.loginUser;
+        let shoppingCar = res.locals.shopping;
         ShoppingCarModel.find({user_id:user._id}).then(doc => {
             console.log("获取购物车详情成功" + doc);
-            res.render('Shopping_car', {shoppingCarList: doc});
+            res.render('Shopping_car', {
+                shoppingCarList: doc,
+                user:user,
+                shoppingCar:shoppingCar
+            });
         }).catch(err => {
             console.log("获取购物车详情失败" + err);
         });

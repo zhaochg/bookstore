@@ -26,7 +26,7 @@ const locals=require('./middleware/local');
 const index = require('./routes/index');
 const users = require('./routes/users');
 const shopping = require('./routes/shopping');
-
+const personal = require('./routes/personal');
 const app = express();
 
 // view engine setup
@@ -57,6 +57,7 @@ app.use('/', index);
 app.use('/index', index);
 app.use('/users', users);
 app.use('/shopping',shopping);
+app.use('/personal',personal);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

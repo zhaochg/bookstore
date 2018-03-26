@@ -9,6 +9,8 @@ const Book ={
         let id = req.params.id;
         let news_List = res.locals.news_List;
         let xiao_List = res.locals.xiao_List;
+        let user = res.locals.user;
+        let shoppingCar = res.locals.shopping;
         bookModel.findOne({_id:id}).then(doc=>{
             console.log('查询书籍详情成功');
 
@@ -17,7 +19,9 @@ const Book ={
                 book:doc,
                 author:author,
                 news_List:news_List,
-                xiao_List:xiao_List
+                xiao_List:xiao_List,
+                user:user,
+                shoppingCar:shoppingCar
             });
         }).catch(err=>{
             console.log('查无此书'+err);
