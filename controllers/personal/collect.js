@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 const collectModel = require('../models/book');
 // 收藏
 const Collect = {
@@ -16,7 +16,6 @@ const Collect = {
     },
 };
     module.export =Collect;
-=======
 const CollectModel=require('../models/category');
 /**
  * 收藏

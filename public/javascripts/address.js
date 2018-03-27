@@ -1,16 +1,14 @@
 $(function(){
     getAddressList();
 });
-
-var page = 1;
-var key = '';
+var xia = 0;
 /*
 * 获取列表
 */
 function getAddressList() {
     $.get('/personal/address',function (data) {
         if (data.status == 1) {
-            alert(data.result);
+            //alert(data.result);
             var list = data.result;
             var html = ''
             for (var i = 0; i < list.length; i++) {
@@ -23,7 +21,8 @@ function getAddressList() {
                 }else{
                     html += '<td style="color: green">不是默认地址</td>'
                 }
-                html += '<td><a href="javascript:;" class="btn-edit"  onclick="editAddressList(\'' + list[i]._id + '\')">编辑</a>';
+                html += '<td><a href="javascript:;" class="btn-edit"  onclick="editAddressList(\'' + i + '\')">编辑</a>';
+                html += '<td><a href="javascript:;" class="btn-edit"  onclick="deleteArticleList(\'' + i + '\')">删除</a>';
                 html += "</tr>"
             }
             $("#categoryList").html(html);
@@ -52,8 +51,9 @@ function saveAddressList(){
     var address_default = $('#address_default').val();
 
     if(id){
-        //    分类修改
-        $.post("/personal/updateAddress/"+id,{
+        //    修改
+        //alert(1);
+        $.post("/personal/updateAddress/"+xia,{
             name:name,
             phone:phone,
             address:address,
@@ -87,27 +87,25 @@ function saveAddressList(){
 /*
 * 编辑
 * */
-function editAddressList(id){
-    $.get("/personal/"+id,function(date){
+function editAddressList(xiabiao){
+    xia = xiabiao;
+    $.get("/personal/updateAddress/"+xiabiao,function(date){
         if(date.status ==1){
-            alert(1111);
             console.log(date.result);
             var category = date.result;
-            $("#id").val(category._id);
-            $("#name").val('');
-            $("#phone").val('');
-            $("#address").val('');
-            $("#default").val('');
+            var id= 1;
+            $("#id").val(id);
+            $("#name").val(category[xiabiao].name) ;
+            $("#phone01").val(category[xiabiao].phone);
+            $("#address01").val(category[xiabiao].address);
+            $("#default").val(category[xiabiao].default);
             $('#articleModal').modal("show");
         }else{
-            alert(2222)
-
+            alert(2222);
             layer.msg(date.msg)
-
         }
     })
 }
-
 /*
 * 删除
 * */
@@ -116,7 +114,7 @@ function deleteArticleList(id){
         btn:['是','否']
     },function(){
         $.post('/personal/del/'+id,{},function(date){
-            if(date.status == 1){
+            if(date.status == 0){
                 layer.msg("刪除失敗");
                 getAddressList();
             }else{

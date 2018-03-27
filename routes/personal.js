@@ -15,11 +15,13 @@ router.post('/password',auth,user.password);
 //获取地址
 router.get('/address',auth,address.index);
 //添加地址
-router.post('/addAddress',address.add);
-//更改地址
-// router.post('/updateAddress',auth,address.update);
-//删除地址
-// router.post('/del',auth,address.delete);
+router.post('/addAddress',auth,address.add);
+// 更改地址
+router.get('/updateAddress/:xiabiao',auth,address.get);
+
+router.post('/updateAddress/:xiabiao',auth,address.update);
+// 删除地址
+router.post('/del/:xiabiao',auth,address.del);
 
 
 
