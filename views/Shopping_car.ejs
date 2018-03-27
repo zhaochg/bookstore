@@ -31,6 +31,7 @@
 <div id="content">
     <!--表格-->
     <div class="container-fluid">
+        <form action="/shopping/balance" method="post">
         <div class="text-danger"><h4>我的购物车</h4></div>
         <%if(shoppingCarList.length > 0){%>
         <table class="table table-striped">
@@ -38,7 +39,7 @@
                 <td class="Ocheck">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" id="checkedAll"> 全选
+                            <input type="checkbox" id="checkedAll" value="1"> 全选
                         </label>
                     </div>
                 </td>
@@ -53,7 +54,7 @@
                 <td class="Ocheck">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" id="shoppingchecked" name="<%=shoppingCarList[i].book_id.name%>" value="1">
+                            <input type="checkbox" name="shoppingCar_id" value="<%=shoppingCarList[i]._id%>">
                         </label>
                     </div>
                 </td>
@@ -63,9 +64,9 @@
                 </td>
                 <td class="text-danger"><%= shoppingCarList[i].book_id.price%></td>
                 <td>
-                    <button class="btn btn-default" type="button">+</button>
-                    <input type="text" id="text_box" value="<%= shoppingCarList[i].num%>" disabled name="num" class="btn input01">
-                    <button class="btn btn-default" type="button">-</button>
+                    <button type="button" class="btn btn-default" type="button">+</button>
+                    <input type="text" id="text_box" value="<%= shoppingCarList[i].num%>" disabled class="btn input01">
+                    <button type="button" class="btn btn-default" type="button">-</button>
                 </td>
                 <td>￥<%= shoppingCarList[i].num*shoppingCarList[i].book_id.price%></td>
                 <td><a href="/shopping/delete?shoppingCar_id=<%= shoppingCarList[i]._id%>">删除</a></td>
@@ -74,7 +75,7 @@
             <tr>
                 <td class="Ocheck">
                     <div class="checkbox">
-                        <input type="checkbox"> 全选
+                        <input type="checkbox" > 全选
                     </div>
                 </td>
                 <td><a href="">删除选中图书</a></td>
@@ -93,8 +94,9 @@
             <a href="/">再逛逛</a>
         </div>
         <div class="text-right">
-            <a  href="/shopping/balance" class="btn btn-danger">去结算</a>
+            <button  type="submit" class="btn btn-danger">去结算</button>
         </div>
+        </form>
     </div>
 </div>
 </div>
@@ -113,6 +115,7 @@
             layer.msg(err);
         }
     })
+
 </script>
 <script src="/javascripts/Shopping_car.js"></script>
 </html>

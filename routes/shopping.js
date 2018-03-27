@@ -4,34 +4,23 @@ const Shopping_car = require('../controllers/shopping_car');
 const auth = require('../middleware/auth');
 const navbar = require('../middleware/navbar');
 const clean = require('../controllers/clean');
+const order = require('../controllers/order');
 
 /**
  * 结算页
  */
-router.get('/balance',auth, navbar,clean.index);
+router.get('/balance',auth,navbar,clean.index);
+router.post('/balance',auth,navbar,clean.index02);
 /**
  * 确认支付
  */
-router.get('/firm',auth,function (req,res,next) {
-    let user = res.locals.user;
-    let shoppingCar = res.locals.shopping;
-    res.render('firm',{
-        user:user,
-        shoppingCar:shoppingCar
-    });
-});
+router.post('/firm',auth,navbar,order.create);
+router.get('/firm/:order_id',auth,navbar,order.index);
 /**
  * 完成支付
  */
-router.get('/pay',auth,function (req,res,next) {
-    let user = res.locals.user;
-    let shoppingCar = res.locals.shopping;
-    res.render('pay',{
-        user:user,
-        shoppingCar:shoppingCar
-    });
-});
-
+router.get('/pay/:order_id',auth,navbar,order.pay);
+router.post('/pay',auth,navbar,order.goPay);
 /**
  * 加入购物车
  */

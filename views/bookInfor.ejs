@@ -161,7 +161,7 @@
             if (parseInt(t.val())!=1){
                 $('#min').attr('disabled',false);
             }
-            $("#pay").attr('href','/shopping/balance?book_id='+id+'&num='+t.val());
+            $("#pay").attr('href','/shopping/balance?book_id='+id+'&num='+t.val()+'&alt='+1);
         });
     //数量减少操作
         $("#min").click(function(){
@@ -169,9 +169,9 @@
             if (parseInt(t.val())==1){
                 $('#min').attr('disabled',true);
             }
-            $("#pay").attr('href','/shopping/balance?book_id='+id+'&num='+t.val());
+            $("#pay").attr('href','/shopping/balance?book_id='+id+'&num='+t.val()+'&alt='+1);
         });
-        $("#pay").attr('href','/shopping/balance?book_id='+id+'&num='+t.val());
+        $("#pay").attr('href','/shopping/balance?book_id='+id+'&num='+t.val()+'&alt='+1);
     });
 </script>
 <script>

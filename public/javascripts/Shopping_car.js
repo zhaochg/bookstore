@@ -3,14 +3,13 @@
  */
 $(function(){
     $("#checkedAll").click(function () {
-        if ($(this).attr("checked")) {
-            // 全选
-            $("#shoppingchecked").each(function () {
+        if ($(this).attr('checked')) {// 全选
+            $("").each(function () {
                 $(this).attr("checked", true);
             });
         }
         else { // 取消全选
-            $("#shoppingchecked").each(function () {
+            $("").each(function () {
                 $(this).attr("checked", false);
             });
         }

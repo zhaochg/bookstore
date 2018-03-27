@@ -24,9 +24,9 @@ const ShoppingCar ={
     add:(req,res,next)=>{
         let user = res.locals.loginUser;
         let num = req.body.num;
-        console.log(num);
+        //console.log(num);
         let book_id = req.body.book_id;
-        console.log(book_id);
+        //console.log(book_id);
         //判断是否有此书籍
         ShoppingCarModel.find({user_id:user._id}).then(doc=>{
             let myBook = true;

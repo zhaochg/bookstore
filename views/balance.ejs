@@ -26,7 +26,7 @@
     </ol>
 </div>
 <!--内容-->
-<div class="w">
+<div class="w" id="w">
     <div id="content">
         <div id="two">
             <div class="fl">
@@ -41,12 +41,12 @@
             <div class="form-group fl">
                 <div class="radio">
                     <label>
-                        <input type="radio" name="address"  value="<%=i%>" checked>
+                        <input type="radio" name="address"  value="<%=i%>">
                         <%=user.address[i].address%>
                     </label>
                 </div>
             </div>
-            <%if(i == 0){%>
+            <%if(i == 1){%>
             <div class="fr">
                 <a href="">默认地址</a>
             </div>
@@ -64,40 +64,66 @@
                     <td>数量</td>
                     <td>小计</td>
                 </tr>
+                <% for(var j=0;j<myOrder.length;j++){%>
                 <tr>
                     <td>
-                        <img src="/uploads/<%=bookInfor.img%>">
-                        <h5><%= bookInfor.name%></h5>
+                        <img src="/uploads/<%= myOrder[j].book_id.img%>">
+                        <h5><%= myOrder[j].book_id.name%></h5>
+                        <input type="hidden" value="<%=myOrder[j].book_id._id%>">
                     </td>
-                    <td>￥<%= bookInfor.price%></td>
-                    <td>
-                        <%= num%>
+                    <td>￥<%= myOrder[j].book_id.price%></td>
+                    <td class="num">
+                        <%= myOrder[j].num%>
                     </td>
-                    <td>￥<%= num*bookInfor.price%></td>
+                    <td>￥<%= myOrder[j].num*myOrder[j].book_id.price%></td>
+                </tr>
+                <% }%>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>总价：?</td>
+                </tr>
 
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>共<%= num%>本，合计<%= num*bookInfor.price%>元</td>
-                </tr>
             </table>
             <div class="fl">
                 <a href="/">再逛逛</a>
             </div>
             <div class="fr">
-                <a href="/shopping/firm" class="btn btn-danger">去结算</a>
+                <a href="javascript:;" class="btn btn-danger" onclick="addOrder()">去结算</a>
             </div>
         </div>
     </div>
 </div>
-
-
 
 <!--底部-->
 <%-include('footer')%>
 </body>
 <script src="/javascripts/jquery-3.2.1.min.js"></script><!--jquery-->
 <script src="/bootstrap-3.3.7/js/bootstrap.js"></script><!--bootstrap官方js-->
+<script>
+    //结算 --创建订单
+    function addOrder(){
+        var book_id= [];
+        var num = [];
+        $("#w input[type='hidden']").each(function(){
+            book_id.push($(this).val());
+        });
+        $("#w td[class='num']").each(function(){
+            num.push(parseInt($(this).html()));
+        });
+        var address_num = 0;
+
+        $.post('/shopping/firm',{
+            book_id:JSON.stringify(book_id),
+            num:JSON.stringify(num),
+            address_num:address_num
+        },function(data){
+            console.log(data);
+            if(data.status == 1){
+                window.location.href = "http://localhost:3000/shopping/firm/"+data.order_id;
+            }
+        });
+    }
+</script>
 </html>

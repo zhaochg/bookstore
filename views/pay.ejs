@@ -34,7 +34,7 @@
             <table>
                 <tr>
                     <td>
-                        <strong>订单提交成功，请尽快付款！订单号：435345345345</strong>
+                        <strong>订单提交成功，请尽快付款！订单号：<%= order.order_num%></strong>
                     </td>
                 </tr>
                 <tr>
@@ -44,15 +44,17 @@
                     <td></td>
                     <td>
                         <div class="fr text-danger">
-                            <strong>应付金额：￥24.00</strong>
+                            <strong>应付金额：￥<%= order.total_price%></strong>
                         </div>
                     </td>
                 </tr>
+                <form action="/shopping/pay" method="post">
+                    <input type="hidden" name="order_id" value="<%= order._id%>">
                 <tr>
                     <td colspan="2">
                         <div class="radio">
                             <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="1">
                                 <img src="/images/zfb.jpg">
                             </label>
                         </div>
@@ -60,7 +62,7 @@
                     <td>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option1" checked>
+                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="0" checked>
                                 <img src="/images/weixin.jpg">
                             </label>
                         </div>
@@ -69,10 +71,11 @@
                 <tr>
                     <td>
                         <div class="fl">
-                            <button type="button" class="btn btn-danger">立即付款</button>
+                            <button type="submit" class="btn btn-danger">立即付款</button>
                         </div>
                     </td>
                 </tr>
+                </form>
             </table>
         </div>
     </div>

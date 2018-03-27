@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 const OrderSchema = new Schema({
     order_num:{
         type:String,
-        default:''
+        default:'11111111'
     },
     user_id:{
       type:Schema.Types.ObjectId,
