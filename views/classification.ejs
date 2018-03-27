@@ -13,84 +13,85 @@
     <link rel="stylesheet" href="/stylesheets/bookstore.css">
     <!--自用样式-->
 </head>
+<style type="text/css">
+    .dropdown-submenu {
+        position: relative;
+    }
+    .dropdown-submenu > .dropdown-menu {
+        top: 0;
+        left: 100%;
+        margin-top: -6px;
+        margin-left: -1px;
+        -webkit-border-radius: 0 6px 6px 6px;
+        -moz-border-radius: 0 6px 6px;
+        border-radius: 0 6px 6px 6px;
+    }
+    .dropdown-submenu:hover > .dropdown-menu {
+        display: block;
+    }
+    .dropdown-submenu > a:after {
+        display: block;
+        content: " ";
+        float: right;
+        width: 0;
+        height: 0;
+        border-color: transparent;
+        border-style: solid;
+        border-width: 5px 0 5px 5px;
+        border-left-color: #ccc;
+        margin-top: 5px;
+        margin-right: -10px;
+    }
+    .dropdown-submenu:hover > a:after {
+        border-left-color: #fff;
+    }
+    .dropdown-submenu.pull-left {
+        float: none;
+    }
+    .dropdown-submenu.pull-left > .dropdown-menu {
+        left: -100%;
+        margin-left: 10px;
+        -webkit-border-radius: 6px 0 6px 6px;
+        -moz-border-radius: 6px 0 6px 6px;
+        border-radius: 6px 0 6px 6px;
+    }
+</style>
 <body>
 <!--头部-->
 <%-include('navbar')%>
 <!--路径导航-->
 <div class="container">
-    <ol class="breadcrumb" style="background: rgba(212,212,212,0.5)">
-        <li><a href="/">首页</a></li>
-        <li class="active">分类</li>
-    </ol>
-</div>
-<div class="container">
-    <div class="row" >
+    <div class="row" style="height: 800px;">
         <div class="col-md-2 col-sm-2 text-center" style=" background: white ;margin-left: 0px; margin-right: 0px ;margin-top: 3%;padding:2%">
             <ul class="nav nav-pills nav-stacked"  id="myTab">
-                <li class="in active "><a href="#f1" data-toggle="tab">
+                <li class="in active ">
+                    <a href="/classification" >
                         <p>
                             图书分类
                         </p>
                     </a>
                 </li>
-                <li ><a href="#f2" data-toggle="tab" >
-                        <p>
-                            畅销小说
-                        </p>
-                    </a>
+                <% for(var i = 0;i < category.length;i++){ %>
+                <li class="dropdown-submenu">
+                    <a href="" data-index="2" data-title="一级菜单"> <%= category[i].name %></a>
+                    <ul class="dropdown-menu">
+                        <% for(var j = 0;j < category[i].category.length;j++){ %>
+                        <li><a data-index="2-1"  href="/classification?pname=<%= category[i].name %>&cname=<%= category[i].category[j].name %>&cid=<%= category[i].category[j]._id %>"><%= category[i].category[j].name %></a></li>
+                        <% } %>
+                    </ul>
                 </li>
-                <li ><a href="#f3" data-toggle="tab" >
-                        <p>
-                            时尚生活
-                        </p>
-                    </a>
-                </li>
-                <li ><a href="#f4" data-toggle="tab" >
-                        <p>
-                            教育辅导
-                        </p>
-                    </a>
-                </li>
-                <li ><a href="#f5" data-toggle="tab" >
-                        <p>
-                            人物传记
-                        </p>
-                    </a>
-                </li>
-                <li ><a href="#f6" data-toggle="tab" >
-                        <p>
-                            经济管理
-                        </p>
-                    </a>
-                </li>
-                <li ><a href="#f7" data-toggle="tab" >
-                        <p>
-                            励志成长
-                        </p>
-                    </a>
-                </li>
-                <li ><a href="#f8" data-toggle="tab" >
-                        <p>
-                            文学艺术
-                        </p>
-                    </a>
-                </li>
-                <li ><a href="#f9" data-toggle="tab" >
-                        <p>
-                            原创文学
-                        </p>
-                    </a>
-                </li>
+            <%}%>
             </ul>
         </div>
+
         <div class="col-md-9 col-sm-9 col-md-offset-1">
             <ol class="breadcrumb" style="background: rgb(212,212,212);margin-top: 60px;">
                 <li>最近上架：</li>
                 <button type="button" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-chevron-up">价格</span>
+                    <a href="/classification?pname=<%= pageInfo.pname %>&cname=<%= pageInfo.cname %>&cid=<%= pageInfo.cid %>&order_cnt=1"><span class="glyphicon glyphicon-chevron-down">销量</span></a>
                 </button>
                 <button type="button" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-chevron-down">价格</span>
+                    <a href="/classification?pname=<%= pageInfo.pname %>&cname=<%= pageInfo.cname %>&cid=<%= pageInfo.cid %>&price=1"><span class="glyphicon glyphicon-chevron-up">价格</span></a>
                 </button>
             </ol>
             <div id="myTabContent" class="tab-content">
@@ -102,902 +103,57 @@
                                 <a href="#">更多&raquo;</a>
                             </div>
                             <div class="row">
+                                <% for (var i=0; i<bookData.length; i++) { %>
                                 <div class="col-sm-4 col-md-3">
                                     <div class="thumbnail">
+                                        <%if(bookData[i].img) {%>
+                                        <img src="/uploads/<%=bookData[i].img%>">
+                                        <% }else {%>
                                         <img src="/images/65465465.jpg">
+                                        <% } %>
                                         <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
+                                            <h3 style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;"><%=bookData[i].name%></h3>
+                                            <p>￥<%=bookData[i].price%></p>
+                                            <p><a href="/bookInfor/<%=bookData[i]._id%>" class="btn btn-danger">点击查看</a></p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
+                                <% } %>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="tab-pane fade" id="f2">
-                    <!--最近上架-->
-                    <div class="row">
-                        <div class="col-md-10">
-                            <div  class="text-right">
-                                <a href="#">更多&raquo;</a>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="f3">
-                    <!--最近上架-->
-                    <div class="row">
-                        <div class="col-md-10">
-
-                            <div  class="text-right">
-                                <a href="#">更多&raquo;</a>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="f4">
-                    <!--最近上架-->
-                    <div class="row">
-                        <div class="col-md-10">
-                            <div  class="text-right">
-                                <a href="#">更多&raquo;</a>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="f5">
-                    <!--最近上架-->
-                    <div class="row">
-                        <div class="col-md-10">
-                            <div  class="text-right">
-                                <a href="#">更多&raquo;</a>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="f6">
-                    <!--最近上架-->
-                    <div class="row">
-                        <div class="col-md-10">
-                            <div  class="text-right">
-                                <a href="#">更多&raquo;</a>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="f7">
-                    <!--最近上架-->
-                    <div class="row">
-                        <div class="col-md-10">
-                            <div  class="text-right">
-                                <a href="#">更多&raquo;</a>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="f8">
-                    <!--最近上架-->
-                    <div class="row">
-                        <div class="col-md-10">
-                            <div  class="text-right">
-                                <a href="#">更多&raquo;</a>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-3">
-                                    <div class="thumbnail">
-                                        <img src="/images/65465465.jpg">
-                                        <div class="caption">
-                                            <h3>剑心</h3>
-                                            <p>￥14.00</p>
-                                            <p><button class="btn btn-danger">点击查看</button></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="f9">
-                    <!--最近上架-->
-                <p>
-                    1111111111111111111111111
-                </p>
                 </div>
             </div>
+
+            <!--分页开始-->
+            <% if(pageInfo.totalPage > 1) { %>
+            <div class="bs-page text-center">
+                <a class="btn btn-default" href="javascript:;">共有<%= pageInfo.totalPage %>页</a>
+                <a class="btn btn-default"
+                   href="/classification?pname=<%= pageInfo.pname %>&cname=<%= pageInfo.cname %>&cid=<%= pageInfo.cid %>&order_cnt=<%= pageInfo.order_cnt %>&price=<%= pageInfo.price %>&page=1">首页</a>
+                <% if (pageInfo.page != 1) { %>
+                <a class="btn btn-default"
+                   href="/classification?pname=<%= pageInfo.pname %>&cname=<%= pageInfo.cname %>&cid=<%= pageInfo.cid %>&order_cnt=<%= pageInfo.order_cnt %>&price=<%= pageInfo.price %>&page=<%= pageInfo.page - 1 %>">上一页</a>
+                <% } %>
+                <a class="btn btn-default active"
+                   href="/classification?pname=<%= pageInfo.pname %>&cname=<%= pageInfo.cname %>&cid=<%= pageInfo.cid %>&order_cnt=<%= pageInfo.order_cnt %>&price=<%= pageInfo.price %>&page=<%= pageInfo.page %>"><%= pageInfo.page %></a>
+
+                <% if (pageInfo.page <= pageInfo.totalPage - 1 ){ %>
+                <a class="btn btn-default"
+                   href="/classification?pname=<%= pageInfo.pname %>&cname=<%= pageInfo.cname %>&cid=<%= pageInfo.cid %>&order_cnt=<%= pageInfo.order_cnt %>&price=<%= pageInfo.price %>&page=<%= parseInt(pageInfo.page) + 1 %>"><%= parseInt(pageInfo.page) + 1 %></a>
+                <% } if (pageInfo.page <= pageInfo.totalPage - 2)  { %>
+                <a class="btn btn-default"
+                   href="/classification?pname=<%= pageInfo.pname %>&cname=<%= pageInfo.cname %>&cid=<%= pageInfo.cid %>&order_cnt=<%= pageInfo.order_cnt %>&price=<%= pageInfo.price %>&page=<%= parseInt(pageInfo.page) + 2 %>"><%= parseInt(pageInfo.page) + 2 %></a>
+                <% }if(pageInfo.page < pageInfo.totalPage) { %>
+                <a class="btn btn-default"
+                   href="/classification?pname=<%= pageInfo.pname %>&cname=<%= pageInfo.cname %>&cid=<%= pageInfo.cid %>&order_cnt=<%= pageInfo.order_cnt %>&price=<%= pageInfo.price %>&page=<%= parseInt(pageInfo.page) + 1 %>">下一页</a>
+                <% } %>
+                <a class="btn btn-default"
+                   href="/classification?pname=<%= pageInfo.pname %>&cname=<%= pageInfo.cname %>&cid=<%= pageInfo.cid %>&order_cnt=<%= pageInfo.order_cnt %>&price=<%= pageInfo.price %>&page=<%= pageInfo.totalPage %>">尾页</a>
+            </div>
+            <% } %>
+            <!--分页结束-->
+
         </div>
     </div>
 </div>

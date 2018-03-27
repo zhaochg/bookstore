@@ -24,6 +24,10 @@ const UserSchema = new Schema({
         type:Number,
         default:1
     },
+    ziwo:{
+        type:String,
+        default:''
+    },
     phone:{
         type:String,
         default:''
@@ -36,7 +40,8 @@ const UserSchema = new Schema({
         {
             name:String,
             phone:String,
-            address:String
+            address:String,
+            address_default:0
         }
     ],
     create_at:{

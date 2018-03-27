@@ -2,14 +2,45 @@
      <div class="text-danger" style="margin-left: 10px">
         <strong>个人设置</strong>
      </div>
+     <input type="hidden" value="" id="imgdata">
+     <input type="hidden" value="" id="suffix">
      <br>
      <div class="col-md-2 text-center">
          <table class="table">
              <tr>
-                 <td><img src="/images/txicon.jpg"></td>
+                 <td id="view" style="width: 10px"><img src="/images/txicon.jpg"></td>
              </tr>
              <tr>
-                 <td><span class="btn btn-info">修改头像</span></td>
+                 <td>
+                     <div>
+                         <button type="button" class="btn btn-default">点击更改头像</button>
+                         <input type="file" id="imgdata" value="点击上传封面图片"  onchange="viewImg(this)" value="<%= user.avatar%>"style="position: absolute;top: 180px; opacity: 0">
+                     </div>
+                     <script>
+                         function viewImg(file) {
+                             var prevDiv = document.getElementById('view');
+                             if (file.files && file.files[0]) {
+
+                                 var filename = file.value;
+                                 var index = filename.lastIndexOf('.');
+                                 var suffix =  filename.substring(index);
+                                 $("#suffix").val(suffix)
+
+                                 var reader = new FileReader();
+                                 reader.onload = function (evt) {
+                                     $("#imgdata").val(evt.target.result);
+                                     prevDiv.innerHTML = '<img width="100px;" src="' + evt.target.result + '" />';
+
+                                     alert(evt.target.result);
+                                     imgdata=evt.target.result;
+                                 }
+                                 reader.readAsDataURL(file.files[0]);
+                             } else {
+                                 prevDiv.innerHTML = '<div class="img" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src=\'' + file.value + '\'"></div>';
+                             }
+                         }
+                     </script>
+                 </td>
              </tr>
          </table>
      </div>
@@ -17,23 +48,27 @@
          <table class="table">
              <tr>
                  <td>邮箱</td>
-                 <td>1359219091@qq.com</td>
+                 <td><%=user.email %></td>
              </tr>
              <tr>
                  <td>昵称</td>
-                 <td>静静</td>
+                 <td><%= user.nickname%></td>
              </tr>
              <tr>
                  <td>性别</td>
-                 <td>女</td>
+                 <td><%if(user.sex==0){%>
+                     女
+                     <%} else  {%>
+                     男
+                 <% } %></td>
              </tr>
              <tr>
-                 <td>出生日期</td>
-                 <td>1111-01-01</td>
+                 <td>联系方式</td>
+                 <td><%= user.phone%></td>
              </tr>
              <tr>
                  <td>自我介绍</td>
-                 <td></td>
+                 <td><%= user.ziwo%></td>
              </tr>
          </table>
         <div class="text-right">
@@ -42,42 +77,51 @@
             </button>
         </div>
      </div>
+
      <!--编辑资料模态框-->
      <div class="modal fade" id="myModal02" tabindex="1">
         <div class="modal-dialog">
+            <form>
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">编辑资料</h4>
                 </div>
                 <div class="modal-body">
-                    <form>
+
                         <div class="form-group">
                             <label for="nickname">昵称</label>
-                            <input type="text" class="form-control" id="nickname">
+                            <input type="text" class="form-control" id="nickname" value="<%= user.nickname%>">
                         </div>
                         <div class="form-group">
                             <label for="sex">性别</label>
                             <div class="checkbox">
-                                <input type="radio" name="sex" id="sex"> 男
-                                <input type="radio" name="sex">女
+                                <% if(user.sex == 1){%>
+                                <input type="radio" name="sex" value="1" checked> 男
+                                <input type="radio" name="sex" value="0">女
+                                <%}else{%>
+                                <input type="radio" name="sex" value="1" > 男
+                                <input type="radio" name="sex" value="0" checked>女
+                                <%}%>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="shengri">出生年月</label>
-                            <input type="text" class="form-control" id="shengri">
+                            <label for="shengri">手机号</label>
+                            <input type="text" class="form-control" id="phone" value="<%= user.phone%>">
                         </div>
                         <div class="form-group">
                             <label for="ziwo">自我介绍</label>
-                            <textarea class="form-control" id="ziwo"></textarea>
+                            <textarea class="form-control" id="ziwo" value="<%= user.ziwo%>"></textarea>
                         </div>
-                    </form>
+
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" data-dismiss="modal">保存</button>
+                    <button onclick="updateUser()" type="button" class="btn btn-warning" data-dismiss="modal">保存</button>
                 </div>
             </div>
+            </form>
         </div>
     </div>
      <!--页脚-->
  </div>
+

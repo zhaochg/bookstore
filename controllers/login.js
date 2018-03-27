@@ -24,10 +24,12 @@ const Login ={
            if(doc){
                let user=doc;
                if(user.password==md5(password)){
+                   req.session.loginUser=user;
+
                     req.session.loginUser=user;
                    req.flash('error', '登录成功！');
-                   res.redirect('/');
 
+                   res.redirect('/');
                }else{
                    req.flash('error','密码错误');
                    res.redirect('/users/login');

@@ -5,7 +5,9 @@ const ShoppingCar = require('../controllers/shopping_car');
 const auth = require('../middleware/auth');
 const book = require('../controllers/book');
 const ranking = require('../middleware/ranking');
+const user = require('../controllers/personal/user')
 const navbar = require('../middleware/navbar');
+
 
 /**
  *首页
@@ -27,7 +29,6 @@ router.get('/classification', navbar, Home.category);
  * 排行
  */
 router.get('/rank', navbar, Home.ranking);
-
 /**
  * 购物车
  */
@@ -39,9 +40,7 @@ router.get('/bookInfor/:id', navbar, ranking ,book.get);
 /**
  * 个人中心
  */
-router.get('/personal',function (req,res,next) {
-    res.render('personal');
-});
+router.get('/personal',auth,user.index);
 
 
 

@@ -25,7 +25,10 @@
                     <li><a href="/personal">个人中心</a></li>
                 </ul>
                 <!-- 登录登出 -->
-                <% if (user){ %>
+
+                <p class="navbar-text navbar-right" id="login">
+                <% if (user){%>
+
                 <p class="navbar-text navbar-right">
                     <a href="/users/loginOut" class="navbar-link">登出</a>
                     <span class="text-danger">欢迎您，<%= user.nickname %></span>
@@ -62,4 +65,17 @@
     #navbar-ex1-collapse ul li a:hover {
         color: red;
     }
+
+    #login a{
+        color: red;
+    }
+     #navigation{
+        /*padding: 0 15%;*/
+        background: #fff;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
+    }
 </style>
+<script src="/javascripts/navbar.js"></script>
+
+
