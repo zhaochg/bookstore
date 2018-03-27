@@ -64,7 +64,6 @@ const Order = {
                         address:address
                     };
                     console.log(receive);
-                    return;
                 }
             }
             //快递信息

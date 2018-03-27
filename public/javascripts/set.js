@@ -1,7 +1,7 @@
 
 function updateUser() {
     var nickname = $("#nickname").val();
-    var sex = $("#sex").val();
+    var sex =  $('input:radio:checked').val();
     var phone = $("#phone").val();
     var ziwo = $("#ziwo").val();
     var imgdata = $("#imgdata").val();
