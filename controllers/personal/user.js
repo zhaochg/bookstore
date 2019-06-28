@@ -1,4 +1,5 @@
 const UserModel = require('../../models/user');
+const OrderModel = require('../../models/order');
 const fs = require("fs");
 const md5=require('md5');
 
@@ -8,11 +9,20 @@ const User ={
     index:(req,res,next)=>{
         let shoppingCar =res.locals.shopping;
         let user = res.locals.loginUser;
-        console.log(user);
-        res.render('personal', {
-            shoppingCar:shoppingCar,
-            user: user
-        });
+        console.log("user_id",user._id)
+        OrderModel.find({user_id:user._id}).sort({create_at:"desc"}).then(doc=>{
+            console.log("订单数据",doc)
+            let shujv  = doc
+            console.log("dingdan",shujv)
+            console.log("gerenxinix",user.address[0]);
+            res.render('personal', {
+                shoppingCar:shoppingCar,
+                user: user,
+                addrs:user.address[0],
+                list:doc
+            });
+        })
+
     },
     // 修改个人信息
     save:(req,res,next)=>{

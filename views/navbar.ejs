@@ -30,7 +30,7 @@
                 <% if (user){%>
 
                 <p class="navbar-text navbar-right">
-                    <a href="/users/loginOut" class="navbar-link">登出</a>
+                    <a href="/users/logout" class="navbar-link">登出</a>
                     <span class="text-danger">欢迎您，<%= user.nickname %></span>
                 </p>
                 <% }else { %>
@@ -42,18 +42,16 @@
                 <% } %>
                 <!-- 搜索 -->
                 <form class="navbar-form navbar-right">
-                    <div class="form-group">
-                        <input class="form-control" placeholder="请输入搜索内容" type="text" name="key">
-                    </div>
-                    <button type="submit" class="btn btn-default">搜索</button>
+                    <!--<div class="form-group">-->
+                        <!--<input class="form-control" placeholder="请输入搜索内容" type="text" name="key">-->
+                    <!--</div>-->
+                    <!--<button type="submit" class="btn btn-default">搜索</button>-->
                 </form>
                 <!-- 购物车 -->
                 <div class="navbar-right">
                     <a href="/shopping" class="btn btn-info navbar-btn">
                         <span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;购物车
-                        <% if(shoppingCar){ %>
-                        <span class="badge"><%= shoppingCar%></span>
-                        <% } %>
+                        <span class="badge" id="shopping_car_count">0</span>
                     </a>
                 </div>
             </div>

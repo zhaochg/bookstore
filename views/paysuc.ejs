@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>确认支付</title>
+    <link rel="stylesheet" href="/bootstrap-3.3.7/css/bootstrap.min.css">
+    <!--bootstrap官方样式-->
+    <link rel="stylesheet" href="/stylesheets/normalize.css">
+    <!--强跨浏览器表现的一致性css 重置样式-->
+    <link rel="stylesheet" href="/stylesheets/bookstore.css">
+    <link rel="stylesheet" href="/stylesheets/base.css">
+
+    <!--自用样式-->
+    <style>
+        #content{
+
+            /*border: 1px solid red;*/
+            margin-top: 100px;
+            margin-bottom: 50px;
+        }
+        .suc{
+            width: 30%;
+            margin: auto;
+            border: 1px solid yellow;
+            text-align: center;
+            padding-top: 50px;
+            margin-top: 50px;
+            padding-bottom: 50px;
+            background: white;
+        }
+        h1{
+            color: green;
+            z-index: 2000;
+            font-size: 20px;
+        }
+        p{
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<!--头部-->
+<%-include('navbar')%>
+<!--路径导航-->
+<!--内容-->
+<div id="content">
+    <div class="suc">
+        <h1>该订单支付成功！</h1>
+        <p>感谢你对本商城的使用，我们会继续努力！</p>
+        <p>祝您合家欢乐！</p>
+    </div>
+</div>
+
+
+<!--底部-->
+<%-include('footer')%>
+</body>
+<script src="/javascripts/jquery-3.2.1.min.js"></script><!--jquery-->
+<script src="/bootstrap-3.3.7/js/bootstrap.js"></script><!--bootstrap官方js-->
+<%- include('shopping_car_cnt.ejs') %>
+</html>

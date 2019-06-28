@@ -1,0 +1,146 @@
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <!--内容-->
+                <div class="w">
+                    <div class="fl w-t">
+                        <div id="div">
+                            <strong>书籍管理</strong>
+                        </div>
+                        <!--增加书-->
+                        <button class="btn btn-danger myadminbtn" data-toggle="modal" data-target="#createbook" >增加书籍</button>
+                        <!--模态框-->
+                        <div class="modal fade" id="createbook" tabindex="1">
+                            <div class="modal-dialog">
+                                <form>
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">编辑资料</h4>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="form-group">
+                                                <label for="bookname">书名</label>
+                                                <input type="text" class="form-control" id="bookname" value="">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="authon">作者</label>
+                                                <input type="text" class="form-control"  id="authon" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="price">价格</label>
+                                                <input type="text" class="form-control" id="price" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="price">作者介绍</label>
+                                                <input type="text" class="form-control" id="authon_conent" value="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="conent">书籍介绍</label>
+                                                <input type="text" class="form-control" id="conent" value="">
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button onclick="create()" type="button" class="btn btn-warning" data-dismiss="modal">保存</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!--书籍-->
+                        <table class="table table-bordered myadmin">
+                            <tr>
+                                <td>name</td>
+                                <td>auther</td>
+                                <td>conent</td>
+                                <td>price</td>
+                                <td>编辑</td>
+                                <td>删除</td>
+                            </tr>
+                            <input type="hidden" id="book_id" value="<%=news_List%>">
+                            <% for(var i=0; i<news_List.length; i++){%>
+                            <tr id="<%=news_List[i]._id%>_dail">
+                                <td id="<%=news_List[i]._id%>_name"><%= news_List[i].name.substr(0,5)+'...'%></td>
+                                <td id="<%=news_List[i]._id%>_author"><%= news_List[i].author_id.name%></td>
+                                <td id="<%=news_List[i]._id%>_content"><%= news_List[i].content.substr(0,10)+'...'%></td>
+                                <td id="<%=news_List[i]._id%>_bookprice">￥<%= news_List[i].price%></td>
+                                <td><button class="btn btn-danger" onclick="del('<%=news_List[i]._id%>')">删除</button></td>
+                                <td><button class="btn btn-danger" data-toggle="modal" data-target="#<%=news_List[i]._id%>" >编辑</button></td>
+                            </tr>
+
+
+                            <div class="modal fade" id="<%=news_List[i]._id%>" tabindex="1">
+                                <div class="modal-dialog">
+                                    <form>
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">编辑资料</h4>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <div class="form-group">
+                                                    <label for="bookname">书名</label>
+                                                    <input type="text" class="form-control" id="<%=news_List[i]._id%>_bookname" value="<%= news_List[i].name%>">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="authon">作者</label>
+                                                    <input type="text" class="form-control" disabled id="<%=news_List[i]._id%>_authon" value="<%= news_List[i].author_id.name%>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="price">价格</label>
+                                                    <input type="text" class="form-control" id="<%=news_List[i]._id%>_price" value="<%= news_List[i].price%>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="conent">书籍介绍</label>
+                                                    <input type="text" class="form-control" id="<%=news_List[i]._id%>_conent" value="<%= news_List[i].content%>">
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button onclick="updateUser('<%=news_List[i]._id%>')" type="button" class="btn btn-warning" data-dismiss="modal">保存</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <%}%>
+                        </table>
+                    </div>
+                </div>
+                <!--分页-->
+                <div class="text-center">
+                    <% if(totalPage> 1){ %>
+                    <nav aria-label="Page navigation" style="margin-left: 30%">
+                        <ul class="pagination">
+                            <%if(pagex > 1){%>
+                            <li>
+                                <a href="/admin/index/?pagex=<%=parseInt(pagex)-1%>&alt=1" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <% } %>
+                            <li><a href="#">第<%= pagex %>页/共<%=totalPage%>页</a></li>
+                            <%if(pagex < totalPage){%>
+                            <li>
+                                <a href="/admin/index/?pagex=<%=parseInt(pagex)+1%>&alt=1" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                            <%}%>
+                        </ul>
+                    </nav>
+                    <%}%>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>

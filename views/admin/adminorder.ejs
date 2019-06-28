@@ -1,0 +1,120 @@
+
+<div class="container ">
+    <div class="row">
+        <div class="col-md-9">
+            <!--内容-->
+            <div class="w">
+                <div class="fl w-t">
+                    <div id="div">
+                        <strong>订单管理</strong>
+                    </div>
+                    <!--一本书-->
+                    <table class="table table-bordered myadmin">
+                        <tr>
+                            <td>订单编号</td>
+                            <td>用户邮箱</td>
+                            <td>用户昵称</td>
+                            <td>数量</td>
+                            <td>价格</td>
+                            <td>状态</td>
+                            <td>操作</td>
+                        </tr>
+                        <% for(var i=0; i<admin_order.length; i++){%>
+                        <tr>
+                            <td><%= admin_order[i].order_num%></td>
+                            <td><%= admin_order[i].user_id.email%></td>
+                            <td><%= admin_order[i].user_id.nickname%></td>
+                            <td><%= admin_order[i].total_num%></td>
+                            <td>￥<%= admin_order[i].total_price%></td>
+                            <% if(admin_order[i].status ==0) {%>
+                            <td>未付款</td>
+                            <%}else{%>
+                            <td>已付款</td>
+                            <%}%>
+
+                            <td><button class="btn btn-danger" data-toggle="modal" data-target="#<%= admin_order[i]._id%>" >查看详情</button></td>
+                        </tr>
+                        <!--模态框-->
+                        <div class="modal fade" id="<%= admin_order[i]._id%>" tabindex="1">
+                            <div class="modal-dialog">
+                                <form>
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">详情信息</h4>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="form-group">
+                                                <label for="order_num">订单编号</label>
+                                                <input type="text" disabled class="form-control"  id="order_num" value="<%= admin_order[i].order_num%>">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="authon">用户邮箱</label>
+                                                <input type="text" class="form-control" disabled id="authon" value="<%= admin_order[i].user_id.email%>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nickname">用户昵称</label>
+                                                <input type="text" class="form-control" disabled id="nickname" value="<%= admin_order[i].user_id.nickname%>">
+                                            </div>
+                                            <% for(var j = 0 ;j<admin_order[i].book.length;j++) {%>
+                                            <div class="form-group">
+                                                <label for="nickname">书籍名称</label>
+                                                <input type="text" class="form-control" disabled id="nickname" value="<%= admin_order[i].book[j].name%>">
+                                                <label for="nickname">书籍单价</label>
+                                                <input type="text" class="form-control" disabled id="nickname" value="<%= admin_order[i].book[j].price%>">
+                                                <label for="nickname">购买数量</label>
+                                                <input type="text" class="form-control" disabled id="nickname" value="<%= admin_order[i].book[j].num%>">
+                                                <label for="nickname">小计</label>
+                                                <input type="text" class="form-control" disabled id="nickname" value="<%= admin_order[i].book[j].total_price%>">
+                                            </div>
+                                            <%}%>
+                                            <div class="form-group">
+                                                <label for="total_num">总数量</label>
+                                                <input type="text" class="form-control" disabled id="total_num" value="<%= admin_order[i].total_num%>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="total_price">总价格</label>
+                                                <input type="text" class="form-control" disabled id="total_price" value="￥<%= admin_order[i].total_price%>">
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button onclick="" type="button" class="btn btn-warning" data-dismiss="modal">确定</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <%}%>
+                    </table>
+                </div>
+            </div>
+            <!--分页-->
+            <div class="text-center">
+                <% if(orderPage> 1){ %>
+                <nav aria-label="Page navigation" style="margin-left: 30%">
+                    <ul class="pagination">
+                        <%if(pageo > 1){%>
+                        <li>
+                            <a href="/admin/index/?pageo=<%=parseInt(pageo)-1%>&alt=1" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <% } %>
+                        <li><a href="#">第<%= pageo %>页/共<%=orderPage%>页</a></li>
+                        <%if(pageo < orderPage){%>
+                        <li>
+                            <a href="/admin/index/?pageo=<%=parseInt(pageo)+1%>&alt=2" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        <%}%>
+                    </ul>
+                </nav>
+                <%}%>
+            </div>
+        </div>
+    </div>
+</div>

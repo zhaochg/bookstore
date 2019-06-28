@@ -8,9 +8,10 @@ const ShoppingCar ={
     //获取购物车详情
     index:(req,res,next)=> {
         let user = res.locals.loginUser;
+        console.log("2222",user)
         let shoppingCar = res.locals.shopping;
         ShoppingCarModel.find({user_id:user._id}).populate('book_id').then(doc => {
-            console.log("获取购物车详情成功");
+            console.log("获取购物车详情成功",doc);
             res.render('Shopping_car', {
                 shoppingCarList: doc,
                 user:user,
@@ -24,9 +25,9 @@ const ShoppingCar ={
     add:(req,res,next)=>{
         let user = res.locals.loginUser;
         let num = req.body.num;
-        //console.log(num);
+        console.log("num",num);
         let book_id = req.body.book_id;
-        //console.log(book_id);
+        console.log(book_id);
         //判断是否有此书籍
         ShoppingCarModel.find({user_id:user._id}).then(doc=>{
             let myBook = true;
@@ -69,22 +70,54 @@ const ShoppingCar ={
     update:(req,res,next)=>{
        //购物车 id 、书籍id  用户id
        // 数量
+        let user = res.locals.loginUser;
+        let id = req.params.id;
+        let num = req.body.num;
+        //数量
+        console.log("id",id,"user",user)
+        ShoppingCarModel.update({user_id:user._id,_id:id},{num:num}).then(doc=>{
+            res.json({
+                status:true,
+                msg:"更新成功!"
+            })
+        }).catch(err=>{
+            res.json({
+                status:true,
+                msg:"更新失败!"
+            })
+        })
 
     },
     //删除购物车
     delete:(req,res,next)=>{
         //购物车 id 、书籍id  用户id
-        let id = req.query.shoppingCar_id;
-        ShoppingCarModel.remove({_id:id}).then(doc=>{
+        let user = res.locals.loginUser;
+        let id = req.params.id;
+        ShoppingCarModel.remove({user_id:user._id,_id:id}).then(doc=>{
             console.log('删除购物车一条信息');
             console.log(doc);
             req.flash("error",'已删除');
-            res.redirect('/shopping');
+            // res.redirect('/shopping');
         }).catch(err=>{
            console.log('删除购物车信息失败'+err);
         });
 
     },
+    count:(req,res,next)=>{
+        let user = res.locals.loginUser;
+        console.log("12121",user)
+        ShoppingCarModel.find({user_id:user._id}).then(doc=>{
+            console.log("0000000000000",doc)
+            let sum=0;
+            for (let i = 0; i < doc.length; i++) {
+                sum += parseInt(doc[i].num);
+            }
+            res.json({
+                status: true,
+                total_num: sum
+            });
+        })
+    }
 
 };
 

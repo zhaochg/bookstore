@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/stylesheets/normalize.css">
     <!--强跨浏览器表现的一致性css 重置样式-->
     <link rel="stylesheet" href="/stylesheets/bookstore.css">
-
+    <link rel="stylesheet" href="/stylesheets/base.css">
     <link rel="stylesheet" href="/stylesheets/iconfont.css">
     <link rel="stylesheet" href="/stylesheets/Shopping.css">
     <!--自用样式-->
@@ -28,77 +28,79 @@
 </div>
 <!--内容-->
 <div class="container">
-<div id="content">
-    <!--表格-->
-    <div class="container-fluid">
-        <form action="/shopping/balance" method="post">
-        <div class="text-danger"><h4>我的购物车</h4></div>
-        <%if(shoppingCarList.length > 0){%>
-        <table class="table table-striped">
-            <tr>
-                <td class="Ocheck">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="checkedAll" value="1"> 全选
-                        </label>
-                    </div>
-                </td>
-                <th>购买信息</th>
-                <th>单价</th>
-                <th>数量</th>
-                <th>小计</th>
-                <th>操作</th>
-            </tr>
-            <% for (var i = 0;i<shoppingCarList.length;i++){%>
-            <tr>
-                <td class="Ocheck">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="shoppingCar_id" value="<%=shoppingCarList[i]._id%>">
-                        </label>
-                    </div>
-                </td>
-                <td>
-                    <img src="/images/54654654.jpg">
-                    <strong><%= shoppingCarList[i].book_id.name%></strong>
-                </td>
-                <td class="text-danger"><%= shoppingCarList[i].book_id.price%></td>
-                <td>
-                    <button type="button" class="btn btn-default" type="button">+</button>
-                    <input type="text" id="text_box" value="<%= shoppingCarList[i].num%>" disabled class="btn input01">
-                    <button type="button" class="btn btn-default" type="button">-</button>
-                </td>
-                <td>￥<%= shoppingCarList[i].num*shoppingCarList[i].book_id.price%></td>
-                <td><a href="/shopping/delete?shoppingCar_id=<%= shoppingCarList[i]._id%>">删除</a></td>
-            </tr>
-            <% }%>
-            <tr>
-                <td class="Ocheck">
-                    <div class="checkbox">
-                        <input type="checkbox" > 全选
-                    </div>
-                </td>
-                <td><a href="">删除选中图书</a></td>
-                <td></td>
-                <td></td>
-                <td>共 <span>0</span> 本，合计 <span>0</span> 元</td>
-                <td></td>
-            </tr>
-            <%}else {%>
-            <div class="text-center">
-                <h1>空空如也</h1>
-            </div>
-            <% }%>
-        </table>
-        <div class="text-left">
-            <a href="/">再逛逛</a>
+    <div id="content">
+        <!--表格-->
+        <div class="container-fluid">
+            <form action="/shopping/balance" method="post" id="cleanForm">
+                <div class="text-danger"><h4>我的购物车</h4></div>
+                <table class="table table-bordered">
+                    <tr>
+                        <td>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="all" onchange="allSelect()"> 全选
+                                </label>
+                            </div>
+                        </td>
+                        <td>购买信息</td>
+                        <td>单价</td>
+                        <td>数量</td>
+                        <td>小计</td>
+                        <td>操作</td>
+                    </tr>
+
+                    <% for(let i = 0;i<shoppingCarList.length;i++){%>
+                    <tr id="<%=shoppingCarList[i]._id%>_delete">
+                        <td>
+                            <div class="checkbox" >
+                                <label>
+                                    <input type="checkbox" onchange="oneSelect()" name="shopping_car" value="<%=shoppingCarList[i]._id%>">
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <img  src="/images/54654654.jpg" alt="">
+                            <p><%= shoppingCarList[i].book_id.name.substr(0, 5) +"..." %></p>
+                        </td>
+                        <td>￥<%=  shoppingCarList[i].book_id.price %></td>
+                        <input type="hidden" id="<%= shoppingCarList[i]._id%>_price" value="<%=  shoppingCarList[i].book_id.price %>">
+                        <td>
+                            <div class="input-group">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="jian('<%= shoppingCarList[i]._id%>')">-</button>
+                        </span>
+                                <input type="text" id="<%= shoppingCarList[i]._id%>_num" disabled  maxlength="3" class="form-control" placeholder="" value="<%=shoppingCarList[i].num%>">
+                                <input type="hidden" id="book_id" value="<%= shoppingCarList[i].book_id._id%>">
+                                <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="add('<%= shoppingCarList[i]._id%>')">+</button>
+                        </span>
+                            </div>
+                        </td>
+                        <td id="<%= shoppingCarList[i]._id%>_sum_price">￥<%=  shoppingCarList[i].book_id.price*shoppingCarList[i].num %></td>
+                        <td><button class="btn btn-danger" onclick="del('<%=shoppingCarList[i]._id%>')">删除</button></td>
+                    </tr>
+
+                    <%}%>
+                    <tr>
+                        <td>
+
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>共 <span id="total_num">0</span>  本，合计<span id="total_price">0</span>元</td>
+                        <td></td>
+                    </tr>
+                </table>
+                <div class="fl">
+                    <a href="/">再逛逛</a>
+                </div>
+                <div class="fr">
+                    <button type="button" class="btn btn-danger" onclick="formSubmit()">去结算</button>
+                </div>
+            </form>
         </div>
-        <div class="text-right">
-            <button  type="submit" class="btn btn-danger">去结算</button>
-        </div>
-        </form>
     </div>
-</div>
 </div>
 
 
@@ -108,14 +110,90 @@
 <script src="/javascripts/jquery-3.2.1.min.js"></script><!--jquery-->
 <script src="/bootstrap-3.3.7/js/bootstrap.js"></script><!--bootstrap官方js-->
 <script src="/javascripts/layer/layer.js"></script>
+<%- include('shopping_car_cnt.ejs') %>
 <script>
-    $(function(){
-        var err='<%=locals.error%>';
-        if(err){
-            layer.msg(err);
+    //减
+    function jian(id){
+        var price = parseInt($("#"+id+"_price").val());
+        var num = parseInt($("#"+id+"_num").val());
+        if(num<=1){
+            num =1;
+        }else {
+            num -=1;
         }
-    })
+
+        $("#"+id+"_num").val(num);
+        var allPrice = num*price
+        $("#"+id+"_sum_price").html('￥'+allPrice);
+        $.post("/shopping/update/"+id,{num:num},function(data){
+            layer.msg(data.msg)
+        })
+        count();
+        totalPrice();
+    };
+    //加
+    function add(id){
+
+        var price = parseInt($("#"+id+"_price").val());
+        var num = parseInt($("#"+id+"_num").val());
+        num +=1;
+        $("#"+id+"_num").val(num);
+        var allPrice = num*price
+        $("#"+id+"_sum_price").html('￥'+allPrice);
+
+        $.post("/shopping/update/"+id,{num:num},function(data){
+            layer.msg(data.msg)
+        })
+        count();
+        totalPrice();
+    }
+    function del(id){
+        $("#"+id+"_delete").remove()
+        $.post("/shopping/delete/"+id,function(data){
+            layer.msg(data.msg);
+        })
+        count();
+        totalPrice();
+    }
+    /*
+    * 全选
+    * */
+    function allSelect(){
+        $("input[name='shopping_car']").prop("checked",$("#all").is(":checked"));
+
+
+        totalPrice();
+    }
+    function oneSelect(){
+        totalPrice();
+    }
+    /*
+    * 计算总价
+    * */
+    function totalPrice(){
+        var total_price = 0;
+        var total_num = 0;
+        $("input[name='shopping_car']").each(function(){
+            if($(this).is(":checked") == true){
+                var id = $(this).val();
+                var num = parseInt($("#"+id+"_num").val());
+                var price = parseInt($("#"+id+"_price").val());
+                total_num += num;
+                total_price +=num*price;
+
+            }
+        })
+        $("#total_num").html(total_num);
+        $("#total_price").html("￥"+total_price);
+
+    }
+    /*
+    * 提交结算
+    * */
+    function formSubmit(){
+        $("#cleanForm").submit();
+    }
+
 
 </script>
-<script src="/javascripts/Shopping_car.js"></script>
 </html>

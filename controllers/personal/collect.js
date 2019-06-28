@@ -44,4 +44,4 @@ const Collect={
     },
 };
 module.exports=Collect;
->>>>>>> 07fe7f41d09d13fb0a43004df1601b4712b779f7
+// >>>>>>> 07fe7f41d09d13fb0a43004df1601b4712b779f7

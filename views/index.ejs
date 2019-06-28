@@ -61,7 +61,7 @@
                         <div class="caption">
                             <h3 style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;"><%=tui_List[i].name%></h3>
                             <p style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;"><%=tui_List[i].content%></p>
-                            <p><a href="/shopping/balance?book_id=<%=tui_List[i]._id%>&num=1&alt=1" class="btn btn-danger">购买</a></p>
+                            <p><a href="/bookInfor/<%=tui_List[i]._id%>" class="btn btn-danger">点击查看</a></p>
                         </div>
                     </div>
                 </div>
@@ -109,4 +109,5 @@
 </body>
 <script src="/javascripts/jquery-3.2.1.min.js"></script><!--jquery-->
 <script src="/bootstrap-3.3.7/js/bootstrap.js"></script><!--bootstrap官方js-->
+<%- include('shopping_car_cnt.ejs') %>
 </html>

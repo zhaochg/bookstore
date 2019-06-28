@@ -44,6 +44,7 @@ const Login ={
 
     },
     logout:(req,res,next)=>{
+        console.log("退出成功！")
         req.session.destroy(err => {
             res.redirect('/users/login');
         })

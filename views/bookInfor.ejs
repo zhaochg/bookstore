@@ -37,15 +37,15 @@
                     <small>类别：</small>&nbsp;&nbsp;&nbsp;<strong>文学艺术>诗词歌赋</strong><br>
                     <small>作者：</small>&nbsp;&nbsp;&nbsp;<strong><%=author.name%></strong><br>
                     <small>版权提供：</small>&nbsp;&nbsp;&nbsp;<strong>中华人民第一出版社</strong><br>
-                    <form action="/shopping/add" method="post" onsubmit="addShopping()">
+                    <form action="/shopping/add" method="post" >
                         <div class="count clearfix">
                             <button type="button" id="min" class="btn"><span class="glyphicon glyphicon-minus"></span></button>
-                            <input type="text" id="num" value="1" name="num">
+                            <input type="hidden" id="num"  value="1" name="num" >
+                            <input type="text" id="num1" disabled value="1" name="num1" >
                             <input type="hidden" value="<%=book._id%>" id="book" name="book_id">
                             <button type="button" id="add" class="btn"><span class="glyphicon glyphicon-plus"></span></button>
                         </div>
                         <button type="submit" class="btn btn-danger">加入购物车</button>
-                        <a id="pay" href="" class="btn btn-default">立即购买</a>
                     </form>
                 </div>
             </div>
@@ -145,6 +145,7 @@
 <script src="/javascripts/jquery-3.2.1.min.js"></script><!--jquery-->
 <script src="/bootstrap-3.3.7/js/bootstrap.js"></script><!--bootstrap官方js-->
 <script src="/javascripts/layer/layer.js"></script>
+<%- include('shopping_car_cnt.ejs') %>
 <script>
     //提示信息
     $(function(){
@@ -153,25 +154,39 @@
             layer.msg(err);
         }
     //获得文本框对象
-        var t = $("#num");
+        var num = parseInt($("#num1").val());
+        console.log("....",num)
         var id = $('#book').val();
     //数量增加操作
         $("#add").click(function(){
-            t.val(parseInt(t.val())+1)
-            if (parseInt(t.val())!=1){
-                $('#min').attr('disabled',false);
-            }
-            $("#pay").attr('href','/shopping/balance?book_id='+id+'&num='+t.val()+'&alt='+1);
+
+            num += 1
+            $("#num1").val(num)
+            $("#num").val(num)
+            console.log("....",num)
+            console.log("fuzhi", $("#num").val())
+
+                // $('#min').attr('disabled',false);
+
+            // $("#pay").attr('href','/shopping/balance?book_id='+id+'&num='+num+'&alt='+1);
         });
     //数量减少操作
         $("#min").click(function(){
-            t.val(parseInt(t.val())-1);
-            if (parseInt(t.val())==1){
+            console.log("num",num)
+            if (num<=1){
+
+                $("#num").val(num)
+                $("#num1").val(num)
                 $('#min').attr('disabled',true);
+            }else{
+                num -=1
+
+                $("#num").val(num)
+                $("#num1").val(num)
             }
-            $("#pay").attr('href','/shopping/balance?book_id='+id+'&num='+t.val()+'&alt='+1);
+            // $("#pay").attr('href','/shopping/balance?book_id='+id+'&num='+num+'&alt='+1);
         });
-        $("#pay").attr('href','/shopping/balance?book_id='+id+'&num='+t.val()+'&alt='+1);
+        // $("#pay").attr('href','/shopping/balance?book_id='+id+'&num='+num+'&alt='+1);
     });
 </script>
 <script>

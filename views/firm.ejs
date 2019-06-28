@@ -27,28 +27,28 @@
     </ol>
 </div>
 <!--内容-->
-<div id="content">
+<div id="content container">
     <div class="w">
         <div id="one">
             <div class="fl">
                 <table class="table">
                     <tr>
                         <td>订单号：</td>
-                        <td><%= order.order_num%></td>
+                        <td><%=list.order_num%></td>
                         <td>付款状态：</td>
-                        <td class="text-danger">待付款</td>
+                        <td>待付款</td>
                     </tr>
                     <tr>
                         <td>收货地址：</td>
-                        <td><%= order.receive.address%></td>
+                        <td><%=addr.address%></td>
                     </tr>
                     <tr>
                         <td>收件人：</td>
-                        <td><%= order.receive.name%></td>
+                        <td><%=addr.name%></td>
                     </tr>
                     <tr>
                         <td>电话：</td>
-                        <td><%= order.receive.phone%></td>
+                        <td><%=addr.phone%></td>
                     </tr>
                 </table>
             </div>
@@ -64,31 +64,36 @@
                         <td>数量</td>
                         <td>小计</td>
                     </tr>
-                    <% for(var i=0; i<order.book.length; i++){%>
+
+                    <%for(let i = 0;i<list.book.length;i++) {%>
                     <tr>
                         <td>
-                            <img src="/images/54654654.jpg">
-                            <h5><%=order.book[i].name%></h5>
+                            <img src="/images/54654654.jpg" alt="">
+                            <h5><%=list.book[i].name%><br><br> <p><%=list.book[i].author%></p></h5>
+
                         </td>
                         <td></td>
-                        <td>￥<%=order.book[i].price%></td>
+                        <td>￥<%=list.book[i].price%></td>
                         <td>
-                            <%=order.book[i].num%>
+                            <%=list.book[i].num%>
                         </td>
-                        <td>￥<%=order.book[i].total_price%></td>
+                        <td>￥ <%=list.book[i].total_price%></td>
 
                     </tr>
-                    <% }%>
+                    <%}%>
+
+
                     <tr>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>共?本，合计<%= order.total_price %>元</td>
+                        <td>共<%=list.total_num%>本，合计<%=list.total_price%>元</td>
                     </tr>
+
                 </table>
                 <div class="fr">
-                    <a href="/shopping/pay/<%=order._id%>" class="btn btn-danger">确认支付</a>
+                    <a href="/shopping/pay/<%=list.order_num%>" class="btn btn-danger">确认支付</a>
                 </div>
             </div>
         </div>
@@ -101,4 +106,5 @@
 </body>
 <script src="/javascripts/jquery-3.2.1.min.js"></script><!--jquery-->
 <script src="/bootstrap-3.3.7/js/bootstrap.js"></script><!--bootstrap官方js-->
+<%- include('shopping_car_cnt.ejs') %>
 </html>

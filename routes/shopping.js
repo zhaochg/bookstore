@@ -9,8 +9,8 @@ const order = require('../controllers/order');
 /**
  * 结算页
  */
-router.get('/balance',auth,navbar,clean.index);
-router.post('/balance',auth,navbar,clean.index02);
+router.post('/balance',auth,navbar,clean.index);
+// router.post('/balance',auth,navbar,clean.index02);
 /**
  * 确认支付
  */
@@ -28,6 +28,11 @@ router.post('/add',auth,Shopping_car.add);
 /**
  * 删除购物车信息
  */
-router.get('/delete',Shopping_car.delete);
-
+router.post('/delete/:id',Shopping_car.delete);
+router.post('/update/:id',Shopping_car.update);
+router.get('/count',Shopping_car.count);
+/**
+ * 删除订单信息
+ */
+router.post('/orderdel/',order.delete);
 module.exports = router;

@@ -1,0 +1,61 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <!--内容-->
+            <div class="w">
+                <div class="fl w-t">
+                    <div id="div">
+                        <strong>用户管理</strong>
+                    </div>
+                    <!--一本书-->
+                    <table class="table table-bordered myadmin">
+                        <tr>
+                            <td>邮箱</td>
+                            <td>昵称</td>
+                            <td>性别</td>
+                            <td>手机号</td>
+
+                        </tr>
+                        <% for(var i=0; i<admin_user.length; i++){%>
+                        <tr>
+                            <td><%= admin_user[i].email%></td>
+                            <td><%= admin_user[i].nickname%></td>
+
+                            <td><%= admin_user[i].sex%></td>
+
+
+
+                            <td><%= admin_user[i].phone%></td>
+                        </tr>
+                        <%}%>
+                    </table>
+                </div>
+            </div>
+            <!--分页-->
+            <div class="text-center">
+                <% if(userPage> 1){ %>
+                <nav aria-label="Page navigation" style="margin-left: 30%">
+                    <ul class="pagination">
+                        <%if(page > 1){%>
+                        <li>
+                            <a href="/admin/index/?page=<%=parseInt(page)-1%>&alt=0" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <% } %>
+                        <li><a href="#">第<%= page %>页/共<%=userPage%>页</a></li>
+                        <%if(page <= userPage){%>
+                        <li>
+                            <a href="/admin/index/?page=<%=parseInt(page)+1%>&alt=0" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        <%}%>
+                    </ul>
+                </nav>
+                <%}%>
+            </div>
+        </div>
+    </div>
+</div>

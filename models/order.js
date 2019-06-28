@@ -27,6 +27,10 @@ const OrderSchema = new Schema({
         type:Number,
         default:0
     },
+    total_num:{
+        type:Number,
+        default:0
+    },
     pay_type:{
         type:Number,
         default:0

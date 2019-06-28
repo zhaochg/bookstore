@@ -4,17 +4,31 @@
     margin-bottom: 20px;
 }
 .table tr th{
-    height:auto;
-    text-align: center;
+    vertical-align: middle;
 }
 .table tr td{
-    height:auto;
-    text-align: center;
+    vertical-align: middle;
 }
-.table tr td img {
-    width: 80px;
-    height: auto;
-    margin-left: -50px;
+
+.table tr:nth-child(n+1) td{
+    height:100px;
+    vertical-align: middle;
+
+}
+.table tr:nth-child(1) td{
+    height:50px;
+    vertical-align: middle;
+
+}
+.table tr:nth-child(n) td img{
+    height: 100px;
+    width: auto;
+}
+.table td .input-group{
+    width: 60px;
+}
+.table td .input-group input{
+    width: 50px;
 }
 .input01{
     width: 50px;

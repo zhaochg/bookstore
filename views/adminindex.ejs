@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>个人中心</title>
+    <link rel="stylesheet" href="/bootstrap-3.3.7/css/bootstrap.css">
+    <!--bootstrap官方样式-->
+    <link rel="stylesheet" href="/stylesheets/normalize.css">
+    <!--强跨浏览器表现的一致性css 重置样式-->
+    <link rel="stylesheet" href="/stylesheets/bookstore.css">
+    <!--自用样式-->
+    <link rel="stylesheet" href="/stylesheets/base.css">
+    <link rel="stylesheet" href="/stylesheets/shangj.css">
+    <link rel="stylesheet" href="/stylesheets/iconfont.css">
+    <style>
+        /*.personal{*/
+            /*border: 1px solid red;*/
+            /*height: 800px;*/
+        /*}*/
+        #myModal02{
+            position: absolute;
+            top: 70px;
+            left: 15%;
+        }
+        .myadmin{
+            margin-top: 18px;
+        }
+        .myadminbtn{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<!--头部-->
+<!--路径导航-->
+<div class="container ">
+    <ol class="breadcrumb" style="background: rgba(212,212,212,0.5)">
+        <li class="active">管理员</li>
+        <li class="active"><a href="/admin/logout">登出</a></li>
+    </ol>
+</div>
+<!--个人中心-->
+<div class="container personal">
+    <div class="row">
+        <div class="col-md-2">
+            <!--<h4>个人中心</h4>-->
+            <hr>
+            <nav>
+                <ul class="nav nav-pills nav-stacked" id="myTab">
+                    <li class="active"><a href="#book" data-toggle="tab">用户管理</a></li>
+                    <li><a href="#order" data-toggle="tab">书籍管理</a></li>
+                    <li><a href="#set" data-toggle="tab">订单管理</a></li>
+                </ul>
+            </nav>
+        </div>
+        <input type="hidden"  value="<%=alt%>" id="alt">
+        <div class="col-md-10 tab-content" style="background: #fff;height: 700px">
+            <div class="tab-pane fade in active" id="book">
+                <!--用户管理-->
+                <%-include('admin/adminuser')%>
+            </div>
+            <div class="tab-pane fade" id="order">
+                <!--书籍管理-->
+                <%-include('admin/adminbook')%>
+            </div>
+            <div class="tab-pane fade" id="set">
+                <!--订单管理 -->
+                <%-include('admin/adminorder')%>
+            </div>
+        </div>
+    </div>
+</div>
+<!--底部-->
+<%-include('footer')%>
+</body>
+<script src="/javascripts/jquery-3.2.1.min.js"></script><!--jquery-->
+<script src="/bootstrap-3.3.7/js/bootstrap.js"></script><!--bootstrap官方js-->
+<script src="/javascripts/layer/layer.js"></script><!--layer.js-->
+<script src="/javascripts/adminbook.js"></script><!--自用-->
+<script>
+    $(function () {
+
+        var alt=$("#alt").val()
+        console.log(alt)
+
+        if(alt = 0){
+            console.log(222222)
+            $('#myTab li:eq(0) a').tab('show');
+        }else if(alt = 1){
+            console.log(444444)
+            $('#myTab li:eq(1) a').tab('show');
+        }else {
+            $('#myTab li:eq(2) a').tab('show');
+        }
+    });
+</script>
+</html>

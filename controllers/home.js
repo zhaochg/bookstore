@@ -66,6 +66,7 @@ const Home = {
         }
         // $ne表示不相等
         const CategoryFun = CategoryModel.find({category: {$ne: []}}).populate('category');//类别
+        console.log("CategoryFun",CategoryFun)
         const BookCount = bookModel.find(where).count();//数量
         const BookFun = bookModel.find(where).populate('author_id').skip((page - 1) * limit).limit(limit).sort(sort); //推荐
         // 并行加载
@@ -116,7 +117,7 @@ const Home = {
             console.log(totalPage);
             //排行榜（畅销榜、新书榜）
             bookModel.find(where).skip((page-1)*limit).limit(limit).sort({order_cnt:"desc",create_at:"desc"}).then(doc => {
-                // console.log('所有书籍'+doc);
+                 console.log('所有书籍'+doc);
                 xiao_List = doc;
                 bookModel.find(where).skip((pagex-1)*limit).limit(limit).sort({create_at:"asc"}).then(doc => {
                     news_List = doc;

@@ -1,0 +1,10 @@
+<script>
+    $(function () {
+        count();
+    })
+    function count(){
+        $.get("/shopping/count",function(data){
+            $("#shopping_car_count").html(data.total_num)
+        })
+    }
+</script>

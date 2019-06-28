@@ -26,104 +26,125 @@
     </ol>
 </div>
 <!--内容-->
-<div class="w" id="w">
-    <div id="content">
-        <div id="two">
-            <div class="fl">
-                <h4>确认收货地址</h4>
+<div class="w container">
+    <form action="/shopping/firm" method="post" id="cleanForm">
+        <div id="content">
+            <div id="two">
+                <div class="fl">
+                    <h4>确认收货地址</h4>
+                </div>
+                <!--<div class="fr">-->
+                    <!--<a href="/personal">管理收货地址</a>-->
+                <!--</div>-->
             </div>
-            <div class="fr">
-                <a href="">管理收货地址</a>
+            <div id="three">
+                <div class="form-group fl">
+                    <% for(let i = 0;i<address.length;i++) {%>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="address_index" <%= address[i].default == 1 ? 'checked' : '' %>  value="<%=i%>">
+                            <span><%= address[i].address %> （<%= address[i].name %> 收） <%= address.phone %></span>
+                            <%= address[i].address == 1 ? '默认地址' : '' %>
+                        </label>
+                    </div>
+                    <%}%>
+                    <!--<div class="radio">-->
+                    <!--<label>-->
+                    <!--<input type="radio" name="optionsRadios"  value="option1">-->
+                    <!--河南省郑州市王牛牛收-->
+                    <!--</label>-->
+                    <!--</div>-->
+                </div>
+
             </div>
-        </div>
-        <div id="three">
-            <% for (var i = 0; i<user.address.length;i++){%>
-            <div class="form-group fl">
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="address"  value="<%=i%>">
-                        <%=user.address[i].address%>
-                    </label>
+
+
+            <!--表格-->
+            <div class="container-fluid">
+                <table class="table table-striped">
+                    <tr>
+                        <td>购买信息</td>
+                        <td>单价</td>
+                        <td>数量</td>
+                        <td>小计</td>
+                    </tr>
+
+                    <% for(let i = 0;i<list.length;i++) {%>
+                    <tr>
+                        <td>
+                            <img src="/images/54654654.jpg" alt="" >
+                            <h5><%= list[i].name%> <br><br><p><%= list[i].author%></p></h5>
+
+                        </td>
+                        <td>￥<%= list[i].price%></td>
+                        <td>
+                            <%= list[i].num%>
+                        </td>
+                        <td style="color: red">￥<%= list[i].total_price%></td>
+
+
+                    </tr>
+                    <input type="hidden" name="shopping_car_id" value="<%= list[i].shopping_car_id%>">
+                    <%}%>
+
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>共 <span style="color: red"><%= total_num%></span>本，合计 <span style="color: red"><%= total_price%></span>元</td>
+                    </tr>
+
+
+                </table>
+                <div class="fl" >
+                    <a href="/">再逛逛</a>
+                </div>
+                <div class="fr">
+                    <a href="javascript:;" class="btn btn-danger" onclick="cleanSubmit()">确认订单</a>
                 </div>
             </div>
-            <%if(i == 1){%>
-            <div class="fr">
-                <a href="">默认地址</a>
-            </div>
-            <%}%>
-            <%}%>
         </div>
-
-
-        <!--表格-->
-        <div class="container-fluid">
-            <table class="table table-striped">
-                <tr>
-                    <td>购买信息</td>
-                    <td>单价</td>
-                    <td>数量</td>
-                    <td>小计</td>
-                </tr>
-                <% for(var j=0;j<myOrder.length;j++){%>
-                <tr>
-                    <td>
-                        <img src="/uploads/<%= myOrder[j].book_id.img%>">
-                        <h5><%= myOrder[j].book_id.name%></h5>
-                        <input type="hidden" value="<%=myOrder[j].book_id._id%>">
-                    </td>
-                    <td>￥<%= myOrder[j].book_id.price%></td>
-                    <td class="num">
-                        <%= myOrder[j].num%>
-                    </td>
-                    <td>￥<%= myOrder[j].num*myOrder[j].book_id.price%></td>
-                </tr>
-                <% }%>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>总价：?</td>
-                </tr>
-
-            </table>
-            <div class="fl">
-                <a href="/">再逛逛</a>
-            </div>
-            <div class="fr">
-                <a href="javascript:;" class="btn btn-danger" onclick="addOrder()">去结算</a>
-            </div>
-        </div>
-    </div>
+    </form>
 </div>
+
+
 
 <!--底部-->
 <%-include('footer')%>
 </body>
 <script src="/javascripts/jquery-3.2.1.min.js"></script><!--jquery-->
 <script src="/bootstrap-3.3.7/js/bootstrap.js"></script><!--bootstrap官方js-->
+<script src="/javascripts/layer/layer.js"></script>
+<%- include('shopping_car_cnt.ejs') %>
 <script>
-    //结算 --创建订单
-    function addOrder(){
-        var book_id= [];
-        var num = [];
-        $("#w input[type='hidden']").each(function(){
-            book_id.push($(this).val());
-        });
-        $("#w td[class='num']").each(function(){
-            num.push(parseInt($(this).html()));
-        });
-        var address_num = 0;
-
-        $.post('/shopping/firm',{
-            book_id:JSON.stringify(book_id),
-            num:JSON.stringify(num),
-            address_num:address_num
-        },function(data){
-            console.log(data);
-            if(data.status == 1){
-                window.location.href = "http://localhost:3000/shopping/firm/"+data.order_id;
-            }
-        });
+    // //结算 --创建订单
+    // function addOrder(){
+    //     var book_id= [];
+    //     var num = [];
+    //     $("#w input[type='hidden']").each(function(){
+    //         book_id.push($(this).val());
+    //     });
+    //     $("#w td[class='num']").each(function(){
+    //         num.push(parseInt($(this).html()));
+    //     });
+    //     var address_num = 0;
+    //
+    //     $.post('/shopping/firm',{
+    //         book_id:JSON.stringify(book_id),
+    //         num:JSON.stringify(num),
+    //         address_num:address_num
+    //     },function(data){
+    //         console.log(data);
+    //         if(data.status == 1){
+    //             window.location.href = "http://localhost:3000/shopping/firm/"+data.order_id;
+    //         }
+    //     });
+    // }
+    /*
+    * 创建订单
+    * */
+    function cleanSubmit(){
+        $("#cleanForm").submit();
     }
 </script>
 </html>

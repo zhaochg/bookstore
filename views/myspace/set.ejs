@@ -52,11 +52,11 @@
              </tr>
              <tr>
                  <td>昵称</td>
-                 <td><%= user.nickname%></td>
+                 <td id="usernickname"><%= user.nickname%></td>
              </tr>
              <tr>
                  <td>性别</td>
-                 <td><%if(user.sex==0){%>
+                 <td id="usersex"><%if(user.sex==0){%>
                      女
                      <%} else  {%>
                      男
@@ -64,11 +64,11 @@
              </tr>
              <tr>
                  <td>联系方式</td>
-                 <td><%= user.phone%></td>
+                 <td id="userphone"><%= user.phone%></td>
              </tr>
              <tr>
                  <td>自我介绍</td>
-                 <td><%= user.ziwo%></td>
+                 <td id="userziwo"><%= user.ziwo%></td>
              </tr>
          </table>
         <div class="text-right">
